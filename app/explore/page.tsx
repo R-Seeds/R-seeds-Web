@@ -35,7 +35,7 @@ const interests = [
 
 export default function ExplorePage() {
   return (
-    <div>
+    <div className='bg-white'>
       <Header />
       <Sidebar />
       <main className="mx-auto max-w-7xl px-6 py-6">

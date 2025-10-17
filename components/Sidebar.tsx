@@ -6,8 +6,8 @@ import { Home, Compass, Coins, MessageCircleMore, UserRound } from 'lucide-react
 const items = [
   { icon: Home, label: 'Home', href: '/' },
   { icon: Compass, label: 'Explore', href: '/explore' },
-  { icon: Coins, label: 'Funds', href: '#' },
-  { icon: MessageCircleMore, label: 'Chat', href: '#' },
+  { icon: Coins, label: 'Funds', href: '/fundings' },
+  { icon: MessageCircleMore, label: 'Chat', href: '/chat' },
   { icon: UserRound, label: 'Profile', href: '#' },
 ];
 

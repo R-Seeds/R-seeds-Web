@@ -24,7 +24,7 @@ const projects = [
 
 export default function Page() {
   return (
-    <div>
+    <div className='bg-white'>
       <Header />
       <Sidebar />
       <main className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 py-6 md:grid-cols-[minmax(0,1fr)_420px]">

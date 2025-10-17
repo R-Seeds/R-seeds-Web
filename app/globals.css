@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --bg: #f7f9fb;
+  --bg: #fafafa;
 }
 
 html, body, #__next { height: 100%; }
