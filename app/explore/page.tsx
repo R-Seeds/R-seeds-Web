@@ -1,13 +1,14 @@
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const mostViewed = [
-  { name: 'AgriBot', img: '/farm.jpg' },
-  { name: 'EduBot', img: '/doctor.jpg' },
-  { name: 'SkyScout', img: '/skyscout.jpg' },
-  { name: 'EduBot', img: '/edubot.jpg' },
-  { name: 'EduBot', img: '/ascent.jpg' },
+  { name: 'AgriBot', img: '/farm.jpg', slug: 'agribot' },
+  { name: 'EduBot', img: '/doctor.jpg', slug: 'edubot' },
+  { name: 'SkyScout', img: '/skyscout.jpg', slug: 'skyscout' },
+  { name: 'EduBot', img: '/edubot.jpg', slug: 'edubot-2' },
+  { name: 'EduBot', img: '/ascent.jpg', slug: 'ascent' },
 ];
 
 const categories = [
@@ -23,13 +24,13 @@ const categories = [
   { name: 'Entertainment', img: '/fam.jpg' },
 ];
 
-const interests: string[] = [
-  '/glass.jpg',
-  '/joker.jpg',
-  '/blues.jpg',
-  '/culinary.jpg',
-  '/food.jpg',
-  '/ascent.jpg',
+const interests = [
+  { img: '/glass.jpg', slug: 'glass' },
+  { img: '/joker.jpg', slug: 'joker' },
+  { img: '/blues.jpg', slug: 'blues' },
+  { img: '/culinary.jpg', slug: 'culinary' },
+  { img: '/food.jpg', slug: 'food' },
+  { img: '/ascent.jpg', slug: 'ascent' },
 ];
 
 export default function ExplorePage() {
@@ -53,10 +54,12 @@ export default function ExplorePage() {
             <div className="mb-2 text-sm font-semibold text-slate-700">Most Viewed</div>
             <div className="grid grid-cols-5 gap-4">
               {mostViewed.map((item) => (
-                <div key={item.name} className="relative h-44 overflow-hidden rounded-xl border-2 border-brand/60">
-                  <Image src={item.img} alt={item.name} fill className="object-cover" />
-                  <div className="absolute inset-x-0 bottom-0 bg-black/50 py-2 text-center text-white text-sm font-semibold">{item.name}</div>
-                </div>
+                <Link key={item.name} href={`/explore/${item.slug}`}>
+                  <div className="relative h-44 overflow-hidden rounded-xl border-2 border-brand/60">
+                    <Image src={item.img} alt={item.name} fill className="object-cover" />
+                    <div className="absolute inset-x-0 bottom-0 bg-black/50 py-2 text-center text-white text-sm font-semibold">{item.name}</div>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -79,13 +82,15 @@ export default function ExplorePage() {
           <div className="mt-6">
             <div className="mb-2 text-sm font-semibold text-slate-700">Based on Your Interests</div>
             <div className="grid grid-cols-3 gap-6">
-              {interests.map((src, i) => (
-                <div key={i} className="relative h-64 overflow-hidden rounded-xl shadow-card">
-                  <Image src={src} alt="interest" fill className="object-cover" />
-                  <div className="absolute inset-x-0 bottom-0 bg-black/60 py-3 text-center">
-                    <span className="text-white text-lg font-semibold">VisionAR</span>
+              {interests.map((item, i) => (
+                <Link key={i} href={`/explore/${item.slug}`}>
+                  <div className="relative h-64 overflow-hidden rounded-xl shadow-card">
+                    <Image src={item.img} alt="interest" fill className="object-cover" />
+                    <div className="absolute inset-x-0 bottom-0 bg-black/60 py-3 text-center">
+                      <span className="text-white text-lg font-semibold">VisionAR</span>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
