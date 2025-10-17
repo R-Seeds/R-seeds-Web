@@ -8,6 +8,7 @@
 
 html, body, #__next { height: 100%; }
 body { @apply bg-[var(--bg)] text-slate-800; }
+.page-muted-bg { background: linear-gradient(180deg, rgba(16,193,152,0.08) 0%, rgba(16,193,152,0) 120px), var(--bg); }
 
 .glass {
   backdrop-filter: saturate(180%) blur(12px);
