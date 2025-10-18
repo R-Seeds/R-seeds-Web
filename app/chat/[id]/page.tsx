@@ -32,7 +32,7 @@ export default function ChatConversation({ params }: Params) {
       <main className="mx-auto max-w-7xl px-6 py-6">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-[400px_1fr]">
           {/* Chat List */}
-          <div className="rounded-2xl bg-white p-6 shadow-card">
+          <div className="rounded-2xl bg-white p-6 shadow-card h-[600px] flex flex-col">
             <div className="mb-6 flex items-center justify-between">
               <h1 className="text-xl font-bold text-slate-900">Chat</h1>
               <button className="grid h-8 w-8 place-items-center rounded border border-slate-200">
@@ -52,7 +52,7 @@ export default function ChatConversation({ params }: Params) {
             </div>
 
             {/* Chat List */}
-            <div className="space-y-3">
+            <div className="space-y-3 flex-1 overflow-y-auto">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((id) => (
                 <Link key={id} href={`/chat/${id}`}>
                   <div className={`flex cursor-pointer items-center gap-3 rounded-lg p-3 hover:bg-slate-50 ${id === 1 ? 'bg-brand/5' : ''}`}>
@@ -76,39 +76,59 @@ export default function ChatConversation({ params }: Params) {
           {/* Chat Conversation */}
           <div className="rounded-2xl bg-white shadow-card flex flex-col h-[600px]">
             {/* Chat Header */}
-            <div className="relative">
-              {/* Green curved section */}
-              <div className="relative bg-brand px-6 py-4" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 80%, 0 100%)' }}>
-                <div className="flex items-center gap-3">
-                  <Image src="/girl.jpg" alt="Umwali Nadia" width={40} height={40} className="h-10 w-10 rounded-full object-cover border-2 border-white" />
-                  <div className="flex-1">
-                    <div className="text-lg font-semibold text-white">Umwali Nadia</div>
-                  </div>
-                  <div className="flex gap-3">
-                    <button className="grid h-8 w-8 place-items-center rounded-full hover:bg-white/20">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-white">
-                        <path d="M23 7l-7 5 7 5V7z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2" stroke="currentColor" strokeWidth="2"/>
-                      </svg>
-                    </button>
-                    <button className="grid h-8 w-8 place-items-center rounded-full hover:bg-white/20">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-white">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </button>
-                    <button className="grid h-8 w-8 place-items-center rounded-full hover:bg-white/20">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-white">
-                        <circle cx="12" cy="12" r="1" stroke="currentColor" strokeWidth="2"/>
-                        <circle cx="19" cy="12" r="1" stroke="currentColor" strokeWidth="2"/>
-                        <circle cx="5" cy="12" r="1" stroke="currentColor" strokeWidth="2"/>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-              {/* White curved section */}
-              <div className="bg-white -mt-2 h-4" style={{ clipPath: 'polygon(0 100%, 100% 80%, 100% 100%, 0% 100%)' }}></div>
-            </div>
+<div className="relative bg-[#00BFA5] h-[90px] flex items-center justify-between px-6 rounded-t-2xl overflow-hidden">
+  {/* Left: profile and name */}
+  <div className="flex items-center gap-3 z-10">
+    <Image
+      src="/girl.jpg"
+      alt="Umwali Nadia"
+      width={48}
+      height={48}
+      className="h-12 w-12 rounded-full object-cover"
+    />
+    <span className="text-white font-semibold text-base">Umwali Nadia</span>
+  </div>
+
+  {/* Right: icons */}
+  <div className="flex items-center gap-5 z-10">
+    {/* Video Call */}
+    <button className="text-white hover:opacity-80 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+        <path d="M23 7l-7 5 7 5V7z" />
+        <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+      </svg>
+    </button>
+
+    {/* Call */}
+    <button className="text-white hover:opacity-80 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+      </svg>
+    </button>
+
+    {/* Menu */}
+    <button className="text-white hover:opacity-80 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+        <circle cx="5" cy="12" r="1" />
+        <circle cx="12" cy="12" r="1" />
+        <circle cx="19" cy="12" r="1" />
+      </svg>
+    </button>
+  </div>
+
+  
+  <svg
+    className="absolute bottom-[-1px] left-0 w-full h-[70px]"
+    viewBox="0 0 500 80"
+    preserveAspectRatio="none"
+  >
+    <path
+      d="M0,40 C150,100 350,0 500,50 L500,0 L0,0 Z"
+      fill="#00BFA5"
+    />
+  </svg>
+</div>
+
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4">

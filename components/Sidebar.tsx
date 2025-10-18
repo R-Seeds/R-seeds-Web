@@ -8,32 +8,39 @@ const items = [
   { icon: Compass, label: 'Explore', href: '/explore' },
   { icon: Coins, label: 'Funds', href: '/fundings' },
   { icon: MessageCircleMore, label: 'Chat', href: '/chat' },
-  { icon: UserRound, label: 'Profile', href: '#' },
+  { icon: UserRound, label: 'Profile', href: '/profile' },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const activeIdx = items.findIndex(i => i.href !== '#' && pathname.startsWith(i.href));
+  const activeIdx = items.findIndex(i => {
+    if (i.href === '#') return false;
+    if (i.href === '/') return pathname === '/';
+    return pathname.startsWith(i.href);
+  });
+  
+  console.log('Current pathname:', pathname);
+  console.log('Active index:', activeIdx);
   return (
-    <aside className="fixed left-6 top-1/2 z-20 flex w-16 -translate-y-1/2 flex-col items-center justify-between rounded-[48px] bg-brand p-3 py-6 text-white shadow-xl" style={{ height: '400px' }}>
+    <aside className="fixed left-6 top-1/2 z-20 flex w-16 -translate-y-1/2 flex-col items-center justify-between rounded-[48px] bg-brand p-3 py-6 text-white shadow-xl" style={{ height: '350px' }}>
       <div className="w-full space-y-10">
         {items.map(({ icon: Icon, label, href }, idx) => (
           <Link key={label} href={href} className="group relative block">
             <div className="grid place-items-center">
-              {idx === activeIdx && label === 'Explore' ? (
-                <div className="h-10 w-10" />
-              ) : (
-                <Icon size={26} className="text-white drop-shadow" />
-              )}
-            </div>
-            {idx === activeIdx && label === 'Explore' && (
-              <div className="absolute -left-2 -top-3 z-10 flex items-center rounded-[24px] bg-white px-4 py-2.5 pr-6 text-slate-900 shadow-[6px_8px_0_rgba(0,0,0,0.15)]">
-                <div className="mr-3 grid h-8 w-8 place-items-center rounded-full bg-brand/10">
-                  <Icon size={22} className="text-brand" />
-                </div>
-                <span className="text-base font-medium">{label}</span>
-              </div>
+            {idx === activeIdx ? (
+              <div className="h-10 w-10" />
+            ) : (
+              <Icon size={26} className="text-white drop-shadow" />
             )}
+          </div>
+          {idx === activeIdx && (
+            <div className="absolute -left-2 -top-3 z-10 flex items-center rounded-[24px] bg-white px-4 py-2.5 pr-6 text-slate-900 shadow-[6px_8px_0_rgba(0,0,0,0.15)]">
+              <div className="mr-3 grid h-8 w-8 place-items-center">
+                <Icon size={22} className="text-brand" />
+              </div>
+              <span className="text-base font-medium">{label}</span>
+            </div>
+          )}
           </Link>
         ))}
       </div>
