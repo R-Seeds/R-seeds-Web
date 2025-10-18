@@ -48,7 +48,17 @@ export default function ProjectDetail({ params }: Params) {
 
           {/* Title + actions */}
           <div className="mt-4 flex items-center justify-between">
-            <h1 className="text-3xl font-bold text-slate-900">{p.title}</h1>
+            <div className="flex items-center gap-2">
+  <h1 className="text-3xl font-bold text-slate-900">{p.title}</h1>
+  <Link
+    href={`/edit-project/${params.slug}`}
+    className="relative group p-1"
+    aria-label="Edit Project"
+  >
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00c399" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19.5 3 21l1.5-4L16.5 3.5z"/></svg>
+    <span className="block h-1 w-6 bg-[#00c399] rounded group-hover:bg-[#00b387] mt-0.5"></span>
+  </Link>
+</div>
             <div className="flex gap-2">
               {p.tags.map((t) => (
                 <span key={t} className="rounded-full border border-brand bg-brand/10 px-3 py-1 text-sm text-brand">

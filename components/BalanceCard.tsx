@@ -1,7 +1,10 @@
+'use client'
 import { Button, Card } from './ui';
 import { Wallet } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function BalanceCard() {
+  const router = useRouter();
   return (
     <Card className="flex items-center justify-between rounded-2xl p-6 shadow-card">
       <div className="flex items-center gap-4">
@@ -15,7 +18,13 @@ export default function BalanceCard() {
       </div>
       <div className="flex items-center gap-4">
         <Button className="rounded-full px-6 py-2">Request Withdraw</Button>
-        <Button className="rounded-full px-6 py-2" variant="primary">Add project</Button>
+        <Button
+          className="rounded-full px-6 py-2"
+          variant="primary"
+          onClick={() => router.push('/add-new-project')}
+        >
+          Add project
+        </Button>
       </div>
     </Card>
   );
