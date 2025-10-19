@@ -109,6 +109,11 @@ export default function EditProjectPage() {
                 className="w-full border rounded px-3 py-2 bg-[#fafbfc]"
               />
             </div>
+            {/* Image Upload Field */}
+            <div>
+              <label className="block font-bold mb-1">Project Image</label>
+              <input type="file" accept="image/*" className="w-full border rounded px-3 py-2 bg-[#fafbfc]" />
+            </div>
             <div>
               <label className="block font-bold mb-1">Mission</label>
               <textarea

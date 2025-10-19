@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const projects = [
-  { name: 'SmartHome Nexus', img: '/fintech.jpg', href: '/project/smarthome-nexus' },
+  { name: 'Fintech', img: '/fintech.jpg', href: '/project/smarthome-nexus' },
   { name: 'Unio', img: '/unio.jpg', href: '/explore/unio' },
   { name: 'Nucleate', img: '/nucleate.jpg', href: '/explore/nucleate' },
   { name: 'Ascent', img: '/ascent.jpg', href: '/explore/ascent' },
