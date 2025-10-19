@@ -7,7 +7,7 @@ export default function Header() {
       <div className="w-full px-6">
         <div className="flex  justify-between w-full py-3">
           {/* Logo - Left aligned */}
-          <div className="flex-shrink-0 -ml-24">
+          <div className="flex-shrink-0 -ml-18">
             <Image 
               src="/logo.png" 
               alt="Local" 
@@ -18,7 +18,7 @@ export default function Header() {
           </div>
           
           {/* Right side - Icons */}
-          <div className="flex items-center gap-4 -mr-24">
+          <div className="flex items-center gap-4 -mr-18">
             <button className="relative p-2 text-slate-600 hover:bg-slate-100 rounded-full">
               <Bell size={20} />
               <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-brand"></span>
