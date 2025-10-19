@@ -43,80 +43,108 @@ export default function ComplaintsPage() {
   const selectedComplaint = complaintsData.find((c) => c.id === selectedId);
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-[#ffffff] min-h-screen">
       <AdminSidebar />
-      <main className="flex-1 p-0 ml-48">
-        <div className="w-full bg-white rounded-2xl shadow-sm p-8 border border-[#f3f7f6] mt-8 mr-8 flex gap-8">
-        {/* Complaints List */}
-          <div className="w-1/2">
-            <div className="flex justify-between items-center mb-10">
-              <h2 className="text-xl font-bold mb-2">Complaints</h2>
-              <select
-                className="border rounded px-2 py-1 bg-white text-gray-700 text-xs"
-                value={selectedYear}
-                onChange={e => setSelectedYear(Number(e.target.value))}
-              >
-                {years.map(year => (
-                  <option key={year} value={year}>{year}</option>
-                ))}
-              </select>
+      <main className="flex-1 p-4 lg:ml-64 transition-all duration-300">
+        <div className="w-full bg-white rounded-2xl shadow-sm p-4 sm:p-6 lg:p-8 border border-[#f3f7f6] mt-4 sm:mt-6 lg:mt-8 flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
+          {/* Complaints List */}
+          <div className="w-full lg:w-1/3 border-b lg:border-b-0 lg:border-r border-gray-200 pb-4 lg:pb-0 lg:pr-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+              <h2 className="text-lg sm:text-xl font-bold">Complaints</h2>
+              <div className="w-full sm:w-auto">
+                <select
+                  value={selectedYear}
+                  onChange={(e) => setSelectedYear(Number(e.target.value))}
+                  className="w-full sm:w-auto border rounded-lg px-3 py-2 bg-white text-gray-700 text-sm focus:ring-2 focus:ring-[#00c399] focus:border-transparent"
+                >
+                  {years.map((year) => (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-          <div className="space-y-3">
-            {complaintsData.map((complaint) => (
-              <div
-                key={complaint.id}
-                className={`border rounded-lg px-4 py-2 flex items-center justify-between bg-[#fafbfb] ${selectedId === complaint.id ? 'border-[#818cf8]' : 'border-gray-200'}`}
-              >
-                <div>
-                  <div className="font-semibold text-xs">{complaint.title}</div>
-                  <div className="text-[11px] text-gray-500">
-                    Project: {complaint.project} · From: {complaint.from}
+            <div className="space-y-2 max-h-[300px] sm:max-h-[400px] lg:max-h-[calc(100vh-250px)] overflow-y-auto pr-2 -mx-2 sm:mx-0">
+              {complaintsData.map((complaint) => (
+                <div
+                  key={complaint.id}
+                  onClick={() => setSelectedId(complaint.id)}
+                  className={`p-3 rounded-lg cursor-pointer transition-colors ${
+                    selectedId === complaint.id
+                      ? 'bg-[#00c399] text-white'
+                      : 'bg-gray-50 hover:bg-gray-100'
+                  }`}
+                >
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <div className="font-medium text-sm sm:text-base">{complaint.title}</div>
+                      <div className="text-xs opacity-75 mt-1">
+                        <span className="block sm:inline">{complaint.project}</span>
+                        <span className="hidden sm:inline"> • </span>
+                        <span className="block sm:inline">{complaint.from}</span>
+                      </div>
+                    </div>
+                    <button 
+                      className="ml-2 px-3 py-1 text-xs font-medium text-[#B45309] bg-white border border-[#B45309] rounded hover:bg-gray-50 focus:outline-none"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedId(complaint.id);
+                      }}
+                    >
+                      Open
+                    </button>
                   </div>
                 </div>
-                <button
-                  className="text-[11px] border border-[#fbbf24] text-[#fbbf24] px-2 py-0.5 rounded hover:bg-[#fbbf24] hover:text-white transition"
-                  onClick={() => setSelectedId(complaint.id)}
-                >
-                  Open
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-        {/* Selected Complaint */}
-        <div className="w-1/2">
-            <div className="bg-[#fafbfb] rounded-lg p-6 h-full">
-            <div className="font-semibold text-sm mb-3">Selected Complaint</div>
-            <div className="bg-white p-3 rounded-lg border border-gray-200 mb-4">
-              <div className="text-xs text-gray-700 mb-2">{selectedComplaint?.content}</div>
-              <div className="text-[11px] text-gray-500">Project: {selectedComplaint?.project} · From: {selectedComplaint?.from}</div>
-            </div>
-            <div className="mb-4">
-              <label className="block text-xs font-medium text-gray-700 mb-1.5">Your Response</label>
-              <textarea
-                className="w-full border border-gray-300 rounded-lg p-2 text-xs min-h-[100px] focus:ring-1 focus:ring-[#00c399] focus:border-transparent"
-                placeholder="Type your response here..."
-                value={response}
-                onChange={(e) => setResponse(e.target.value)}
-              />
-            </div>
-            <div className="flex gap-3">
-              <button className="bg-[#00c399] text-white px-3 py-1 rounded text-xs font-medium hover:bg-[#00a386] transition">
-                Send Response
-              </button>
-              <button className="text-gray-500 text-xs hover:text-gray-700">
-                Mark as Resolved
-              </button>
-              <button className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
-                </svg>
-                <span>Inspect Project</span>
-              </button>
+              ))}
             </div>
           </div>
+
+          {/* Complaint Details */}
+          <div className="flex-1 mt-6 lg:mt-0">
+            {selectedComplaint && (
+              <>
+                <h3 className="text-lg font-semibold mb-4">
+                  {selectedComplaint.title}
+                </h3>
+                <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                  <p className="text-sm text-gray-700">
+                    {selectedComplaint.content}
+                  </p>
+                </div>
+                <div className="mb-6">
+                  <label
+                    htmlFor="response"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Your Response
+                  </label>
+                  <textarea
+                    id="response"
+                    rows={4}
+                    value={response}
+                    onChange={(e) => setResponse(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-[#00c399] focus:border-transparent sm:text-sm transition-colors"
+                    placeholder="Type your response here..."
+                  />
+                </div>
+                <div className="flex flex-col sm:flex-row justify-end gap-3">
+                  
+                  <button 
+                    className="px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#00c399] hover:bg-[#00a386] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00c399]"
+                    disabled={!response.trim()}
+                  >
+                    Reply
+                  </button>
+
+                  <button className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                    Inspect
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
         </div>
-      </div>
       </main>
     </div>
   );
