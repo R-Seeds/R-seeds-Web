@@ -24,11 +24,11 @@ export default function AdminGraduates() {
       <main className="flex-1 p-0 ml-48">
         <div className="w-full bg-white rounded-2xl shadow-sm p-8 border border-[#f3f7f6] mt-8 mr-8">
           <div className="flex justify-between items-center mb-10">
-            <h2 className="text-2xl font-bold mb-2">Graduates</h2>
+            <h2 className="text-xl font-bold mb-2">Graduates</h2>
             <select
               value={selectedYear}
               onChange={e => setSelectedYear(Number(e.target.value))}
-              className="border rounded px-3 py-1.5 bg-white text-gray-700 text-sm"
+              className="border rounded px-2 py-1 bg-white text-gray-700 text-xs"
             >
               {years.map(y => (
                 <option key={y} value={y}>{y}</option>
@@ -36,36 +36,36 @@ export default function AdminGraduates() {
             </select>
           </div>
           <div className="overflow-x-auto mt-8 mb-10">
-            <table className="w-full text-sm table-fixed">
+            <table className="w-full text-xs table-fixed">
               <thead>
                 <tr className="border-b h-14">
-                  <th className="text-left py-3 px-4 font-semibold text-gray-700 w-1/5">Name</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-700 w-1/6">Year</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-700 w-1/4">Email</th>
-                  <th className="text-left py-3 px-4 font-semibold text-gray-700 w-1/6">Status</th>
-                  <th className="text-right py-3 pr-48 pl-4 font-semibold text-gray-700 w-1/4">Actions</th>
+                  <th className="text-left py-2 px-3 font-semibold text-gray-700 w-1/5 text-xs">Name</th>
+                  <th className="text-left py-2 px-3 font-semibold text-gray-700 w-1/6 text-xs">Year</th>
+                  <th className="text-left py-2 px-3 font-semibold text-gray-700 w-1/4 text-xs">Email</th>
+                  <th className="text-left py-2 px-3 font-semibold text-gray-700 w-1/6 text-xs">Status</th>
+                  <th className="text-right py-2 pr-4 pl-3 font-semibold text-gray-700 w-1/4 text-xs">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {graduates.map((g, i) => (
                   <tr key={i} className="border-b last:border-b-0 hover:bg-[#f6fcfa]">
-                    <td className="py-4 px-4 font-medium truncate">{g.name}</td>
-                    <td className="py-4 px-4">{g.year}</td>
-                    <td className="py-4 px-4 text-gray-600 truncate">{g.email}</td>
-                    <td className="py-4 px-4">
+                    <td className="py-3 px-3 font-medium truncate text-xs">{g.name}</td>
+                    <td className="py-3 px-3 text-xs">{g.year}</td>
+                    <td className="py-3 px-3 text-gray-600 truncate text-xs">{g.email}</td>
+                    <td className="py-3 px-3">
                       {g.status === 'verified' ? (
-                        <span className="px-2 py-0.5 rounded-full border border-[#00c399] text-[#00c399] text-xs bg-[#f6fcfa]">Verified</span>
+                        <span className="px-1.5 py-0.5 rounded-full border border-[#00c399] text-[#00c399] text-[11px] bg-[#f6fcfa]">Verified</span>
                       ) : (
-                        <span className="px-2 py-0.5 rounded-full border border-[#fbbf24] text-[#fbbf24] text-xs bg-[#fffbea]">Pending</span>
+                        <span className="px-1.5 py-0.5 rounded-full border border-[#fbbf24] text-[#fbbf24] text-[11px] bg-[#fffbea]">Pending</span>
                       )}
                     </td>
-                    <td className="py-4 pr-6 pl-4 flex justify-end gap-2">
+                    <td className="py-3 pr-4 pl-3 flex justify-end gap-1.5">
                       {g.status === 'pending' && (
-                        <button className="px-3 py-1.5 rounded bg-[#00c399] text-white text-sm font-semibold hover:bg-[#00a386] transition">Approve</button>
+                        <button className="px-2 py-0.5 rounded bg-[#00c399] text-white text-[11px] font-semibold hover:bg-[#00a386] transition">Approve</button>
                       )}
-                      <button className="px-3 py-1.5 rounded bg-[#f3f4f6] text-gray-700 text-sm font-semibold hover:bg-gray-200 transition">View</button>
-                      <button className="px-3 py-1.5 rounded bg-[#f3f4f6] text-gray-700 text-sm font-semibold hover:bg-gray-200 transition">Inspect</button>
-                      <button className="px-3 py-1.5 rounded bg-[#f3f4f6] text-gray-700 text-sm font-semibold hover:bg-gray-200 transition">Delete</button>
+                      <button className="px-2 py-0.5 rounded bg-[#f3f4f6] text-gray-700 text-[11px] font-semibold hover:bg-gray-200 transition">View</button>
+                      <button className="px-2 py-0.5 rounded bg-[#f3f4f6] text-gray-700 text-[11px] font-semibold hover:bg-gray-200 transition">Inspect</button>
+                      <button className="px-2 py-0.5 rounded bg-[#f3f4f6] text-gray-700 text-[11px] font-semibold hover:bg-gray-200 transition">Delete</button>
                     </td>
                   </tr>
                 ))}
@@ -75,7 +75,7 @@ export default function AdminGraduates() {
           {/* Pagination */}
           <div className="flex justify-center items-center gap-1 mt-8">
             <button
-              className="px-3 py-1 rounded bg-[#f3f4f6] text-gray-700 text-sm"
+              className="px-2 py-0.5 rounded bg-[#f3f4f6] text-gray-700 text-xs"
               disabled={page === 1}
               onClick={() => setPage(page - 1)}
             >
@@ -85,7 +85,7 @@ export default function AdminGraduates() {
               {[1, 2, 3, 4, 5].map(num => (
                 <button
                   key={num}
-                  className={`w-8 h-8 rounded text-sm ${page === num ? 'bg-[#00c399] text-white' : 'bg-[#f3f4f6] text-gray-700'}`}
+                  className={`w-7 h-7 rounded text-xs flex items-center justify-center ${page === num ? 'bg-[#00c399] text-white' : 'bg-[#f3f4f6] text-gray-700'}`}
                   onClick={() => setPage(num)}
                 >
                   {num}
@@ -93,14 +93,14 @@ export default function AdminGraduates() {
               ))}
               <span className="px-2 py-1">...</span>
               <button
-                className={`w-8 h-8 rounded text-sm ${page === totalPages ? 'bg-[#00c399] text-white' : 'bg-[#f3f4f6] text-gray-700'}`}
+                className={`w-7 h-7 rounded text-xs flex items-center justify-center ${page === totalPages ? 'bg-[#00c399] text-white' : 'bg-[#f3f4f6] text-gray-700'}`}
                 onClick={() => setPage(totalPages)}
               >
                 {totalPages}
               </button>
             </div>
             <button
-              className="px-3 py-1 rounded bg-[#f3f4f6] text-gray-700 text-sm"
+              className="px-2 py-0.5 rounded bg-[#f3f4f6] text-gray-700 text-xs"
               disabled={page === totalPages}
               onClick={() => setPage(page + 1)}
             >

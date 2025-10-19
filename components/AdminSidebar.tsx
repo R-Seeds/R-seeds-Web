@@ -23,7 +23,7 @@ export default function AdminSidebar() {
         <div className="flex items-center gap-2 mb-2">
           {/* Replace with actual logo if available */}
           <Image src="/white.png" alt="R-seeds logo" width={36} height={36} className="" />
-          <span className="text-white text-3xl font-bold">-seeds</span>
+          <span className="text-white text-2xl font-bold">-seeds</span>
         </div>
         {/* Search */}
         <div className="flex items-center bg-white rounded-lg px-4 py-3 mb-6 shadow-sm">
@@ -31,7 +31,7 @@ export default function AdminSidebar() {
           <input
             type="text"
             placeholder="Search graduates/ projects..."
-            className="bg-transparent outline-none text-lg flex-1 text-gray-800 placeholder-gray-400"
+            className="bg-transparent outline-none text-base flex-1 text-gray-800 placeholder-gray-400"
             style={{ minWidth: 0 }}
           />
         </div>
@@ -41,13 +41,13 @@ export default function AdminSidebar() {
             <Link 
               key={label} 
               href={href} 
-              className={`flex items-center gap-5 py-3.5 px-5 rounded-lg font-semibold transition text-xl ${
+              className={`flex items-center gap-4 py-3 px-4 rounded-lg font-semibold transition text-base ${
                 pathname === href 
                   ? 'bg-white text-[#00c399] shadow-md' 
                   : 'text-white hover:bg-[#00b387]'
               }`}
             >
-              <Icon size={26} className="" />
+              <Icon size={20} className="" />
               <span>{label}</span>
             </Link>
           ))}

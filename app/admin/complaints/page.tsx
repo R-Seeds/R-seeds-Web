@@ -50,9 +50,9 @@ export default function ComplaintsPage() {
         {/* Complaints List */}
           <div className="w-1/2">
             <div className="flex justify-between items-center mb-10">
-              <h2 className="text-2xl font-bold mb-2">Complaints</h2>
+              <h2 className="text-xl font-bold mb-2">Complaints</h2>
               <select
-                className="border rounded px-3 py-1.5 bg-white text-gray-700 text-sm"
+                className="border rounded px-2 py-1 bg-white text-gray-700 text-xs"
                 value={selectedYear}
                 onChange={e => setSelectedYear(Number(e.target.value))}
               >
@@ -68,13 +68,13 @@ export default function ComplaintsPage() {
                 className={`border rounded-lg px-4 py-2 flex items-center justify-between bg-[#fafbfb] ${selectedId === complaint.id ? 'border-[#818cf8]' : 'border-gray-200'}`}
               >
                 <div>
-                  <div className="font-semibold text-sm">{complaint.title}</div>
-                  <div className="text-xs text-gray-500">
+                  <div className="font-semibold text-xs">{complaint.title}</div>
+                  <div className="text-[11px] text-gray-500">
                     Project: {complaint.project} · From: {complaint.from}
                   </div>
                 </div>
                 <button
-                  className="text-xs border border-[#fbbf24] text-[#fbbf24] px-3 py-0.5 rounded hover:bg-[#fbbf24] hover:text-white transition"
+                  className="text-[11px] border border-[#fbbf24] text-[#fbbf24] px-2 py-0.5 rounded hover:bg-[#fbbf24] hover:text-white transition"
                   onClick={() => setSelectedId(complaint.id)}
                 >
                   Open
@@ -86,26 +86,26 @@ export default function ComplaintsPage() {
         {/* Selected Complaint */}
         <div className="w-1/2">
             <div className="bg-[#fafbfb] rounded-lg p-6 h-full">
-            <div className="font-semibold text-base mb-4">Selected Complaint</div>
-            <div className="bg-white p-4 rounded-lg border border-gray-200 mb-4">
-              <div className="text-sm text-gray-700 mb-3">{selectedComplaint?.content}</div>
-              <div className="text-xs text-gray-500">Project: {selectedComplaint?.project} · From: {selectedComplaint?.from}</div>
+            <div className="font-semibold text-sm mb-3">Selected Complaint</div>
+            <div className="bg-white p-3 rounded-lg border border-gray-200 mb-4">
+              <div className="text-xs text-gray-700 mb-2">{selectedComplaint?.content}</div>
+              <div className="text-[11px] text-gray-500">Project: {selectedComplaint?.project} · From: {selectedComplaint?.from}</div>
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Your Response</label>
+              <label className="block text-xs font-medium text-gray-700 mb-1.5">Your Response</label>
               <textarea
-                className="w-full border border-gray-300 rounded-lg p-3 text-sm min-h-[120px] focus:ring-2 focus:ring-[#00c399] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg p-2 text-xs min-h-[100px] focus:ring-1 focus:ring-[#00c399] focus:border-transparent"
                 placeholder="Type your response here..."
                 value={response}
                 onChange={(e) => setResponse(e.target.value)}
               />
             </div>
             <div className="flex gap-3">
-              <button className="bg-[#00c399] hover:bg-[#00a386] text-white px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2">
-                <span>Send Response</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
+              <button className="bg-[#00c399] text-white px-3 py-1 rounded text-xs font-medium hover:bg-[#00a386] transition">
+                Send Response
+              </button>
+              <button className="text-gray-500 text-xs hover:text-gray-700">
+                Mark as Resolved
               </button>
               <button className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
