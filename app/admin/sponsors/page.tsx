@@ -13,7 +13,7 @@ const sponsorsData = Array.from({ length: 10 }, (_, i) => ({
 const years = [2025, 2024, 2023, 2022];
 
 const PAGE_SIZE = 10;
-const totalPages = 10; // Assuming 10 pages for now
+const totalPages = 10; 
 
 export default function SponsorsPage() {
   const [selectedYear, setSelectedYear] = useState(years[0]);
@@ -67,7 +67,7 @@ export default function SponsorsPage() {
                       <td className="py-4 pr-2 sm:pr-4 pl-3 text-right">
                          <button 
                             className="px-3 py-1 text-xs font-medium text-white bg-[#00c399] rounded hover:bg-[#00a386] focus:outline-none"
-                            onClick={() => {/* Approve logic */}}
+                            onClick={() => {}}
                           >
                             View
                           </button>

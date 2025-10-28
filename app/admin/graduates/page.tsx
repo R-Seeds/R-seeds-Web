@@ -71,7 +71,7 @@ export default function AdminGraduates() {
                       <td className="py-4 pr-2 sm:pr-4 pl-3">
                         <div className="flex items-center justify-end space-x-2">
                           <button 
-                            className="px-3 py-1 text-xs font-medium text-white  bg-[#00c399] border border-gray-300 rounded hover: bg-[#00c399] focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[#00c399] transition-colors"
+                            className="px-3 py-1 text-xs font-medium text-white  bg-[#00c399] border border-gray-300 rounded hover:bg-[#00c399] focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[#00c399] transition-colors"
                             onClick={() => {}}
                           >
                             Approve
@@ -111,7 +111,7 @@ export default function AdminGraduates() {
               </button>
               <div className="flex items-center space-x-1">
                 {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                  // Show page numbers with ellipsis
+                  
                   let pageNum;
                   if (totalPages <= 5 || page <= 3) {
                     pageNum = i + 1;

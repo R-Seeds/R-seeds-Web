@@ -74,19 +74,19 @@ export default function AdminProjects() {
                         <div className="flex items-center justify-end space-x-2">
                           <button 
                             className="px-3 py-1 text-xs font-medium text-white bg-[#00c399] rounded hover:bg-[#00a386] focus:outline-none"
-                            onClick={() => {/* Approve logic */}}
+                            onClick={() => {}}
                           >
                             View
                           </button>
                           <button 
                             className="px-3 py-1 text-xs font-medium text-black bg-gray-100 border border-gray-300 rounded hover:bg-gray-50 focus:outline-none"
-                            onClick={() => {/* Inspect logic */}}
+                            onClick={() => {}}
                           >
                             Spotlight
                           </button>
                           <button 
                             className="px-3 py-1 text-xs font-medium text-black bg-gray-100 border border-gray-300 rounded hover:bg-red-50 focus:outline-none"
-                            onClick={() => {/* Delete logic */}}
+                            onClick={() => {}}
                           >
                             Archive
                           </button>

@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import Header from '@/components/Header';
+
 import AdminSidebar from '@/components/AdminSidebar';
 
 const stats = [
@@ -32,7 +31,7 @@ export default function AdminDashboard() {
           {stats.map((s, i) => (
             <div
               key={i}
-              className="relative flex flex-col justify-center border border-[#f3f7f6] border-w-100  items-center bg-white rounded-2xl shadow-sm px-4 py-6 sm:px-6 lg:px-8 min-h-[120px] sm:min-h-[140px] border border-[#f3f7f6] hover:shadow-md transition-shadow"
+              className="relative flex flex-col justify-center  border-[#f3f7f6] border-w-100  items-center bg-white rounded-2xl shadow-sm px-4 py-6 sm:px-6 lg:px-8 min-h-[120px] sm:min-h-[140px] border border-[#f3f7f6] hover:shadow-md transition-shadow"
             > 
               <div className="absolute left-0 top-6 h-10 sm:h-12 w-2 sm:w-3 bg-[#00c399] rounded-r-lg" />
               <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#00c399] mb-2 sm:mb-3" style={{letterSpacing: 1}}>
