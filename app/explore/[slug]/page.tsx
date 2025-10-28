@@ -38,7 +38,7 @@ const sample = {
 
 export default function ProjectDetail({ params }: Params) {
   const [isMounted, setIsMounted] = useState(false);
-  const p = sample; // In real app, fetch by params.slug
+  const p = sample; 
   const progress = Math.round((p.raised / p.target) * 100);
 
   useEffect(() => {
@@ -95,7 +95,7 @@ export default function ProjectDetail({ params }: Params) {
             />
           </motion.div>
 
-          {/* Title + actions */}
+          {/* theeee title and actions */}
           <motion.div 
             className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
             variants={fadeInUp}
