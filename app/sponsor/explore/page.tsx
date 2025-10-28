@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import Sidebar from '../Sidebar';
 import Image from 'next/image';
 import Link from 'next/link';
-import { fadeInUp, staggerContainer, slideInFromLeft, slideInFromRight, scaleUp } from '@/utils/animations';
+import { fadeInUp, staggerContainer, scaleUp } from '@/utils/animations';
 
 const mostViewed = [
   { name: 'AgriBot', img: '/farm.jpg', slug: 'agribot' },

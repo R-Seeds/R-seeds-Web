@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import Sidebar from '../../Sidebar';
 import Image from 'next/image';
 import Link from 'next/link';
-import { fadeInUp, staggerContainer, slideInFromLeft, slideInFromRight, scaleUp } from '@/utils/animations';
+import { fadeInUp, staggerContainer, scaleUp } from '@/utils/animations';
 
 type Params = { params: { slug: string } };
 
@@ -38,7 +38,7 @@ const sample = {
 
 export default function ProjectDetail({ params }: Params) {
   const [isMounted, setIsMounted] = useState(false);
-  const p = sample; // In real app, fetch by params.slug
+  const p = sample; 
   const progress = Math.round((p.raised / p.target) * 100);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function ProjectDetail({ params }: Params) {
   if (!isMounted) return null;
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-white">
       <Header />
       <Sidebar />
       <AnimatePresence mode='wait'>
@@ -106,7 +106,7 @@ export default function ProjectDetail({ params }: Params) {
             <div className="flex items-center gap-2">
               <h1 className="text-3xl font-bold text-slate-900">{p.title}</h1>
               <Link
-                href={`/edit-project/${params.slug}`}
+                href={`/sponsor/edit-project/${params.slug}`}
                 className="relative group p-1"
                 aria-label="Edit Project"
               >
@@ -249,13 +249,13 @@ export default function ProjectDetail({ params }: Params) {
             </motion.div>
           </motion.div>
 
-          {/* Milestones */}
+          {/* Milestone */}
           <motion.div 
             className="mt-12 p-6 bg-white rounded-xl border border-slate-100 shadow-sm"
             variants={fadeInUp}
             custom={0.9}
           >
-            <div className="mb-6 text-lg font-bold text-slate-800">Project Milestones</div>
+            <div className="mb-6 text-sm font-bold text-brand">Milestone</div>
             <div className="relative">
               {/* Timeline line */}
               <div className="absolute top-6 left-0 right-0 h-1 bg-brand"></div>
@@ -274,7 +274,7 @@ export default function ProjectDetail({ params }: Params) {
                 ))}
                 
                 {/* Current milestone */}
-                <div className="relative z-10">
+                <div className="relative z-10 mr-36">
                   <div className="h-6 w-6 rounded-full bg-brand border-2 border-brand flex items-center justify-center">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="text-white">
                       <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -314,204 +314,44 @@ export default function ProjectDetail({ params }: Params) {
             </div>
           </motion.div>
 
-          {/* Funding Info */}
+          {/* Funding info (simple list) */}
           <motion.div 
-            className="mt-12 p-6 bg-gradient-to-br from-brand/5 to-white rounded-xl border border-slate-100"
+            className="mt-10"
             variants={fadeInUp}
             custom={1}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
           >
-            <motion.div 
-              className="mb-6 text-lg font-bold text-slate-800"
-              variants={fadeInUp}
-              custom={1.1}
-            >
-              Funding Progress
-            </motion.div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Raised Amount Card */}
-              <motion.div 
-                className="p-6 bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
-                variants={fadeInUp}
-                custom={1.1}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-sm font-medium text-slate-500">Raised</div>
-                    <motion.div 
-                      className="text-3xl font-bold text-brand mt-1"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      $2,700
-                    </motion.div>
-                  </div>
-                  <div className="h-12 w-12 rounded-full bg-brand/10 flex items-center justify-center">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-brand">
-                      <path d="M12 1v22M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                    </svg>
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <div className="flex justify-between text-sm text-slate-500 mb-1">
-                    <span>Goal: $10,000</span>
-                    <span>27%</span>
-                  </div>
-                  <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                    <motion.div 
-                      className="h-full bg-brand rounded-full"
-                      initial={{ width: 0 }}
-                      animate={{ width: '27%' }}
-                      transition={{ duration: 1, delay: 0.3 }}
-                    />
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Backers Card */}
-              <motion.div 
-                className="p-6 bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
-                variants={fadeInUp}
-                custom={1.2}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-sm font-medium text-slate-500">Backers</div>
-                    <motion.div 
-                      className="text-3xl font-bold text-slate-800 mt-1"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 }}
-                    >
-                      18
-                    </motion.div>
-                  </div>
-                  <div className="h-12 w-12 rounded-full bg-blue-50 flex items-center justify-center">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-blue-500">
-                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M23 21v-2a4 4 0 0 0-3-3.87m-4-12a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <div className="text-sm text-slate-500">People backed this project</div>
-                  <div className="mt-3 flex -space-x-2">
-                    {[1, 2, 3, 4].map((i) => (
-                      <motion.div 
-                        key={i}
-                        className="h-8 w-8 rounded-full bg-slate-200 border-2 border-white"
-                        initial={{ x: -10 * i, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ delay: 0.1 * i }}
-                      />
-                    ))}
-                    <div className="h-8 w-8 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-xs font-medium text-slate-500">
-                      +14
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Days Left Card */}
-              <motion.div 
-                className="p-6 bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
-                variants={fadeInUp}
-                custom={1.3}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-sm font-medium text-slate-500">Days Left</div>
-                    <motion.div 
-                      className="text-3xl font-bold text-amber-500 mt-1"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 }}
-                    >
-                      45
-                    </motion.div>
-                  </div>
-                  <div className="h-12 w-12 rounded-full bg-amber-50 flex items-center justify-center">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-amber-500"/>
-                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-                      <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <motion.div 
-            className="text-3xl font-bold text-amber-500 mt-1"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-          >
-            45
+            <div className="text-sm font-bold text-brand mb-3">Funding info</div>
+            <div className="space-y-1 text-[13px] leading-relaxed text-slate-700">
+              <div><span className="font-semibold">Project Name:</span> SkyScout</div>
+              <div><span className="font-semibold">Funding Goal:</span> $12,000</div>
+              <div><span className="font-semibold">Current Raised:</span> $8,450</div>
+              <div><span className="font-semibold">Donors:</span> 37 contributors</div>
+            </div>
           </motion.div>
-        </div>
-        <div className="h-12 w-12 rounded-full bg-amber-50 flex items-center justify-center">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-amber-500">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-            <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
-      </div>
-      <div className="mt-4">
-        <div className="flex justify-between text-sm text-slate-500 mb-1">
-          <span>Funding ends in</span>
-          <span>60%</span>
-        </div>
-        <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+
+          {/* Links and Docs */}
           <motion.div 
-            className="h-full bg-amber-400 rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: '60%' }}
-            transition={{ duration: 1, delay: 0.5 }}
-          />
-        </div>
-        <div className="mt-2 text-xs text-slate-400">
-          Project ends on December 1, 2025
-        </div>
-      </div>
-    </motion.div>
-  </div>
-  
-  {/* Call to Action */}
-  <motion.div 
-    className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 bg-brand/5 rounded-xl"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.6 }}
-  >
-    <div className="flex-1">
-      <h3 className="text-lg font-bold text-slate-800">Ready to support this project?</h3>
-      <p className="text-sm text-slate-600 mt-1">Join 18 backers who have already supported this project.</p>
+            className="mt-8"
+            variants={fadeInUp}
+            custom={1.1}
+          >
+            <div className="text-sm font-bold text-brand mb-3">Links and Docs</div>
+            <div className="space-y-1 text-[13px] leading-relaxed text-slate-700">
+              <div>
+                <span className="font-semibold">Project website:</span> <a className="text-brand hover:underline" href="#">https://www.skyscout.rw</a>
+              </div>
+              <div>
+                <span className="font-semibold">Jira Link:</span> <a className="text-brand hover:underline" href="#">link</a>
+              </div>
+              <div>
+                <span className="font-semibold">GitHub Repo:</span> <a className="text-brand hover:underline" href="#">https://github.com/RCA-Projects/GreenByte</a>
+              </div>
+            </div>
+          </motion.div>
+
+        </motion.main>
+      </AnimatePresence>
     </div>
-    <motion.button 
-      className="px-6 py-3 bg-brand text-white rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand/50"
-      whileHover={{ 
-        scale: 1.05,
-        boxShadow: '0 4px 12px -2px rgba(0, 195, 153, 0.3)'
-      }}
-      whileTap={{ 
-        scale: 0.98,
-        boxShadow: '0 2px 6px -1px rgba(0, 195, 153, 0.2)'
-      }}
-      transition={{ 
-        type: 'spring',
-        stiffness: 400,
-        damping: 10
-      }}
-    >
-      Back this project
-    </motion.button>
-  </motion.div>
-</motion.div>
-</motion.main>
-</AnimatePresence>
-</div>
- );
+  );
 }
 

@@ -54,7 +54,7 @@ export default function ChatConversation({ params }: Params) {
             {/* Chat List */}
             <div className="space-y-3 flex-1 overflow-y-auto">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((id) => (
-                <Link key={id} href={`/chat/${id}`}>
+                <Link key={id} href={`/sponsor/chat/${id}`}>
                   <div className={`flex cursor-pointer items-center gap-3 rounded-lg p-3 hover:bg-slate-50 ${id === 1 ? 'bg-brand/5' : ''}`}>
                     <div className="relative">
                       <Image src="/girl.jpg" alt="Umwali Nadia" width={48} height={48} className="h-12 w-12 rounded-full object-cover border-2 border-brand" />

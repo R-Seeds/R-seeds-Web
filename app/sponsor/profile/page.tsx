@@ -1,3 +1,4 @@
+'use client';
 import Header from '@/components/Header';
 import Sidebar from '../Sidebar';
 import Image from 'next/image';
@@ -32,7 +33,7 @@ export default function ProfilePage() {
             <button className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors">
               <Edit3 size={16} className="text-white" />
             </button>
-            {/* Profile Picture - overlapping the banner */}
+            {/* Profile Picture */}
             <div className="absolute -bottom-12 left-6">
               <Image
                 src="/girl.jpg"
@@ -46,7 +47,7 @@ export default function ProfilePage() {
 
           {/* Profile Content */}
           <div className="pt-16 pb-6">
-            {/* User Name - positioned directly under the profile picture */}
+            {/* User Name  */}
             <div className="px-6 mb-6">
               <div className="ml-6">
                 <h1 className="text-2xl font-bold text-slate-900">Nadia Uwimana</h1>
