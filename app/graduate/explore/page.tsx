@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import Sidebar from '../Sidebar';
 import Image from 'next/image';
 import Link from 'next/link';
-import { fadeInUp, staggerContainer, slideInFromLeft, slideInFromRight, scaleUp } from '@/utils/animations';
+import { fadeInUp, staggerContainer, scaleUp } from '@/utils/animations';
 
 const mostViewed = [
   { name: 'AgriBot', img: '/farm.jpg', slug: 'agribot' },
@@ -89,7 +89,7 @@ export default function ExplorePage() {
             >
               {mostViewed.map((item, i) => (
                 <motion.div key={item.name} variants={scaleUp} custom={i * 0.1}>
-                  <Link href={`/explore/${item.slug}`}>
+                  <Link href={`/graduate/explore/${item.slug}`}>
                     <div className="group relative h-48 overflow-hidden rounded-xl border-2 border-brand/60 transition-all duration-300 hover:border-brand/90 hover:shadow-lg">
                       <Image 
                         src={item.img} 

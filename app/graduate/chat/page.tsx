@@ -42,7 +42,7 @@ export default function ChatPage() {
             {/* Chat List */}
             <div className="space-y-3">
               {chats.map((chat) => (
-                <Link key={chat.id} href={`/chat/${chat.id}`}>
+                <Link key={chat.id} href={`/graduate/chat/${chat.id}`}>
                   <div className="flex cursor-pointer items-center gap-3 rounded-lg p-3 hover:bg-slate-50">
                     <div className="relative">
                       <Image src={chat.avatar} alt={chat.name} width={48} height={48} className="h-12 w-12 rounded-full object-cover border-2 border-brand" />

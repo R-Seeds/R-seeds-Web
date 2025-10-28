@@ -1,10 +1,11 @@
 'use client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Sidebar from './Sidebar';
 import Spotlight from '@/components/Spotlight';
-import BalanceCard from '@/components/BalanceCard';
+import BalanceCard from './BalanceCard';
 import ProjectCard from '@/components/ProjectCard';
 import Notifications from '@/components/Notifications';
 import { fadeInUp, staggerContainer } from '@/utils/animations';
@@ -28,13 +29,29 @@ const projects = [
 
 export default function Page() {
   const [isMounted, setIsMounted] = useState(false);
+  const [roleChecked, setRoleChecked] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setIsMounted(true);
+    // Role guard: only allow graduates
+    try {
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      const type = (localStorage.getItem('userType') || 'user').toLowerCase();
+      if (!isLoggedIn) {
+        router.replace('/');
+        return;
+      }
+      if (type !== 'graduate') {
+        if (type === 'sponsor') router.replace('/sponsor');
+        else router.replace('/user');
+      }
+    } catch {}
+    setRoleChecked(true);
     return () => setIsMounted(false);
   }, []);
 
-  if (!isMounted) return null;
+  if (!isMounted || !roleChecked) return null;
 
   return (
     <div className='bg-white'>
