@@ -30,13 +30,13 @@ export default function AdminSidebar() {
       }
     };
 
-    // Set initial value
+    
     handleResize();
 
-    // Add event listener
+    
     window.addEventListener('resize', handleResize);
 
-    // Clean up
+   
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -44,7 +44,7 @@ export default function AdminSidebar() {
 
   return (
     <>
-      {/* Mobile menu button */}
+      {/*  menu button */}
       <button 
         onClick={toggleSidebar}
         className="fixed top-4 left-4 z-50 p-2 rounded-md bg-[#00c399] text-white lg:hidden shadow-lg"

@@ -20,7 +20,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Small delay to trigger the animation after component mounts
+    
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 100);
@@ -49,7 +49,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       y: 0,
       transition: { 
         duration: 0.5, 
-        ease: [0.4, 0, 0.2, 1] // Using cubic-bezier values for easeOut
+        ease: [0.4, 0, 0.2, 1] 
       }
     },
     hover: { 
