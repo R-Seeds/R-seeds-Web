@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Inter } from 'next/font/google';
 import Image from 'next/image';
-import favicon from '/public/rseeds.png';
 
-// Load Inter font with specific weights
+
+
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
