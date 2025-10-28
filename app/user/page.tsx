@@ -1,6 +1,7 @@
 'use client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Sidebar from './Sidebar';
 import Spotlight from '@/components/Spotlight';
@@ -28,13 +29,29 @@ const projects = [
 
 export default function Page() {
   const [isMounted, setIsMounted] = useState(false);
+  const [roleChecked, setRoleChecked] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setIsMounted(true);
+    // Role guard: default user only
+    try {
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      const type = (localStorage.getItem('userType') || 'user').toLowerCase();
+      if (!isLoggedIn) {
+        router.replace('/');
+        return;
+      }
+      if (type !== 'user') {
+        // Stay consistent: accessing /user while logged as another role goes to home
+        router.replace('/');
+      }
+    } catch {}
+    setRoleChecked(true);
     return () => setIsMounted(false);
   }, []);
 
-  if (!isMounted) return null;
+  if (!isMounted || !roleChecked) return null;
 
   return (
     <div className='bg-white'>

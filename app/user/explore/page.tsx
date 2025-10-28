@@ -89,7 +89,7 @@ export default function ExplorePage() {
             >
               {mostViewed.map((item, i) => (
                 <motion.div key={item.name} variants={scaleUp} custom={i * 0.1}>
-                  <Link href={`/explore/${item.slug}`}>
+                  <Link href={`/user/explore/${item.slug}`}>
                     <div className="group relative h-48 overflow-hidden rounded-xl border-2 border-brand/60 transition-all duration-300 hover:border-brand/90 hover:shadow-lg">
                       <Image 
                         src={item.img} 
@@ -155,7 +155,7 @@ export default function ExplorePage() {
                   transition={{ type: 'spring', stiffness: 300 }}
                   className="group relative overflow-hidden rounded-2xl shadow-lg"
                 >
-                  <Link href={`/explore/${item.slug}`}>
+                  <Link href={`/user/explore/${item.slug}`}>
                     <div className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[3/4] lg:aspect-[4/3]">
                       <Image 
                         src={item.img} 
