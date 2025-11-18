@@ -122,7 +122,7 @@ export default function WhatWeOffer() {
           </div>
 
           <button
-            className={`group inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white text-[#154035] font-semibold hover:bg-opacity-90 transition-all duration-300 hover:shadow-lg transform ${
+            className={`group inline-flex items-center gap-2 px-2 py-2 rounded-full bg-white text-[#154035] font-semibold hover:bg-opacity-90 transition-all duration-300 hover:shadow-lg transform ${
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-4"
