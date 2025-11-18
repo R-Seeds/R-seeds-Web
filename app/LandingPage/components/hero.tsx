@@ -113,22 +113,22 @@ const HeroSection = () => {
       </nav>
 
       {/* Hero Content */}
-      <div className="relative z-30 flex flex-col lg:flex-row items-center justify-between px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-32 py-6 md:py-8 lg:py-12 gap-8 lg:gap-0 max-w-[2000px] mx-auto w-full">
+      <div className="relative z-30 flex flex-col lg:flex-row items-center justify-between px-0 py-6 md:py-8 lg:py-12 gap-8 lg:gap-0 w-full">
         {/* Left Side - Image */}
         <div className="w-full lg:w-1/2 relative animate-fadeInLeft order-2 lg:order-1">
-          <div className="relative max-w-[500px] mx-auto lg:mx-0">
+          <div className="relative w-full max-w-none mx-auto lg:mx-0">
             {/* Background decorative circles - BEHIND the image */}
-            <div className="absolute -top-10 -left-10 w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[400px] md:h-[400px] bg-gradient-to-br from-emerald-300 to-teal-200 rounded-full opacity-40 animate-pulse-slow z-0"></div>
-            <div className="absolute top-10 sm:top-20 left-10 sm:left-20 w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] md:w-[350px] md:h-[350px] bg-gradient-to-br from-cyan-200 to-emerald-100 rounded-full opacity-30 animate-pulse-slow animation-delay-1000 z-0"></div>
+            <div className="absolute -top-10 -left-10 w-[350px] h-[350px] sm:w-[450px] sm:h-[450px] md:w-[550px] md:h-[550px] lg:w-[650px] lg:h-[650px] bg-gradient-to-br from-emerald-300 to-teal-200 rounded-full opacity-40 animate-pulse-slow z-0"></div>
+            <div className="absolute top-10 sm:top-20 left-10 sm:left-20 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] bg-gradient-to-br from-cyan-200 to-emerald-100 rounded-full opacity-30 animate-pulse-slow animation-delay-1000 z-0"></div>
             
             {/* Woman image - ABOVE the decorative circles */}
-            <div className="relative z-20">
+            <div className="relative z-20 w-full">
               <Image 
                 src="/women.png" 
                 alt="woman" 
-                width={800} 
-                height={900} 
-                className="w-full h-auto object-contain"
+                width={1200} 
+                height={1350} 
+                className="w-full h-auto object-contain scale-110 lg:scale-125"
                 priority
               />
             </div>
@@ -180,7 +180,7 @@ const HeroSection = () => {
         </div>
 
         {/* Right Side - Content */}
-        <div className="w-full lg:w-1/2 lg:pl-8 xl:pl-16 space-y-4 md:space-y-6 lg:space-y-8 order-1 lg:order-2">
+        <div className="w-full lg:w-1/2 px-4 md:px-8 lg:pl-8 xl:pl-12 space-y-4 md:space-y-6 lg:space-y-8 order-1 lg:order-2">
           <h1
             className="text-[#000000] animate-fadeInRight text-center lg:text-left"
             style={{

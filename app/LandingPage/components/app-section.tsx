@@ -90,7 +90,7 @@ const AppSection = () => {
               </h3>
               
               {/* Decorative Line */}
-              <div className={`w-24 md:w-32 h-1 bg-[#00C896] mb-6 ${isVisible ? 'animate-expand-width' : 'w-0'}`}></div>
+              <div className={`w-24 md:w-32 h-2 bg-[#00C896] mb-6 rounded-full ${isVisible ? 'animate-expand-width' : 'w-0'}`}></div>
             </div>
 
             <h4 
@@ -114,8 +114,9 @@ const AppSection = () => {
                 href="#" 
                 className="group relative inline-flex items-center gap-3 bg-[#1a4d3e] hover:bg-[#154035] text-white px-6 py-3.5 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <div className="w-8 h-8 flex items-center justify-center">
-                  <Apple className="w-8 h-8" fill="white" />
+                <div className="w-14 h-14 flex items-center justify-center">
+                  {/* <Apple className="w-8 h-8" fill="white" /> */}
+                  <Image src="/apple.png" alt="Apple" width={100} height={100} />
                 </div>
                 <div className="text-left">
                   <div className="text-xs opacity-90" style={{ fontFamily: 'Poppins, sans-serif' }}>
@@ -132,13 +133,14 @@ const AppSection = () => {
                 href="#" 
                 className="group relative inline-flex items-center gap-3 bg-[#1a4d3e] hover:bg-[#154035] text-white px-6 py-3.5 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <div className="w-8 h-8 flex items-center justify-center">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div className="w-14 h-14 flex items-center justify-center">
+                  {/* <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3.5 3.85L17.35 17.7L3.5 31.55C2.95 31.1 2.6 30.4 2.6 29.6V5.8C2.6 5 2.95 4.3 3.5 3.85Z" fill="white"/>
                     <path d="M22.7 12.35L18.8 16.25L5.5 2.95C5.9 2.65 6.4 2.5 6.9 2.5C7.5 2.5 8.05 2.7 8.5 3.05L22.7 12.35Z" fill="white"/>
                     <path d="M22.7 22.05L8.5 31.35C8.05 31.7 7.5 31.9 6.9 31.9C6.4 31.9 5.9 31.75 5.5 31.45L18.8 18.15L22.7 22.05Z" fill="white"/>
                     <path d="M29.1 15.2L24.15 12.35L19.85 16.65L24.15 20.95L29.1 18.1C29.8 17.7 30.3 16.95 30.3 16.15C30.3 15.35 29.8 14.6 29.1 15.2Z" fill="white"/>
-                  </svg>
+                  </svg> */}
+                  <Image src="/play.png" alt="Google" width={100} height={100} />
                 </div>
                 <div className="text-left">
                   <div className="text-xs opacity-90" style={{ fontFamily: 'Poppins, sans-serif' }}>

@@ -1,213 +1,168 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+const testimonials = [
+  {
+    id: 1,
+    quote:
+      "Thanks to this platform, my smart irrigation project reached donors I never imagined. I secured the funding I needed to make my idea a reality!",
+    author: "Aline Mukamana",
+    role: "Class of 2025",
+    image: "/girl.jpg",
+  },
+  {
+    id: 2,
+    quote:
+      "The exposure and support I received through this platform have been invaluable for developing my AI medical diagnostic solution.",
+    author: "Hassan Yousuf",
+    role: "Class of 2025",
+    image: "/girl.jpg",
+  },
+  {
+    id: 3,
+    quote:
+      "Being part of this community connected me with investors who truly believed in my vision. This is more than just funding, it is a partnership.",
+    author: "Amina Okafor",
+    role: "Class of 2025",
+    image: "/girl.jpg",
+  },
+  {
+    id: 4,
+    quote:
+      "As a donor, I found incredible projects and talented innovators all in one place. The transparency and impact are remarkable.",
+    author: "James Mitchell",
+    role: "Global Donor",
+    image: "/girl.jpg",
+  },
+];
+
 export default function Testimonials() {
-  const testimonials = [
-    {
-      text: "Thanks to this platform, my smart irrigation project reached secured the funding I needed to make my dream a reality.",
-      name: "Ada Okonkwo",
-      role: "Tech Innovator",
-      image: "/glass.jpg",
-    },
-    {
-      text: "Thanks to this platform, my smart irrigation project reached secured the funding I needed to make my dream a reality.",
-      name: "Chidi Amadi",
-      role: "Entrepreneur",
-      image: "/girl.jpg",
-    },
-    {
-      text: "Thanks to this platform, my smart irrigation project reached secured the funding I needed to make my dream a reality.",
-      name: "Zainab Hassan",
-      role: "Developer",
-      image: "/girl.jpg",
-    },
-    {
-      text: "Thanks to this platform, my smart irrigation project reached secured the funding I needed to make my dream a reality.",
-      name: "Kwame Asante",
-      role: "Designer",
-      image: "/african-man-designer.jpg",
-    },
-    {
-      text: "Thanks to this platform, my smart irrigation project reached secured the funding I needed to make my dream a reality.",
-      name: "Fatima Al-Rashid",
-      role: "Innovator",
-      image: "/african-woman-innovator.jpg",
-    },
-    {
-      text: "Thanks to this platform, my smart irrigation project reached secured the funding I needed to make my dream a reality.",
-      name: "Kofi Mensah",
-      role: "Founder",
-      image: "/african-man-founder.jpg",
-    },
-  ];
-
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [counter, setCounter] = useState(0);
+  const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Auto-rotate testimonials every 3 seconds
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, [testimonials.length]);
-
-  // Counter animation to 10K
-  useEffect(() => {
-    if (counter < 10000) {
-      const timer = setTimeout(() => {
-        setCounter(
-          Math.min(counter + Math.floor(Math.random() * 500) + 100, 10000)
-        );
-      }, 50);
-      return () => clearTimeout(timer);
+    if (isAutoPlay) {
+      autoPlayRef.current = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+      }, 6000);
     }
-  }, [counter]);
+    return () => {
+      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    };
+  }, [isAutoPlay]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+    setIsAutoPlay(false);
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8 },
-    },
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    setIsAutoPlay(false);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
+    setIsAutoPlay(false);
   };
 
   return (
-    <section className="py-20 px-6 bg-gradient-to-b from-white to-[#f0fdf9]">
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="max-w-7xl mx-auto"
-      >
-        <motion.h2
-          variants={itemVariants}
-          className="text-4xl font-bold text-center text-[#154035] mb-16"
-        >
+    <section
+      ref={sectionRef}
+      className="w-full py-20 bg-gradient-to-b from-white to-blue-50/30"
+    >
+      <div className="max-w-7xl mx-auto px-4">
+        <h2 className="text-5xl font-bold text-center mb-16 text-black animate-fade-in-up">
           What Donors & Graduates Say
-        </motion.h2>
+        </h2>
 
-        {/* Carousel Container */}
         <div className="relative">
-          <div className="overflow-hidden rounded-lg">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.5 }}
-                className="p-8 md:p-12 bg-white border-2 border-[#00C896]/20 rounded-lg min-h-64 flex flex-col justify-between"
-              >
-                <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                  "{testimonials[currentIndex].text}"
-                </p>
+          {/* Testimonial Cards Carousel */}
+          <div className="overflow-hidden">
+            <div
+              className="flex transition-transform duration-700 ease-out"
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+              {testimonials.map((testimonial, index) => (
+                <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
+                  <div className="bg-white border-2 border-cyan-400 rounded-2xl p-8 min-h-72 flex flex-col justify-between relative overflow-hidden group hover:shadow-xl transition-all duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-                <div className="flex items-center gap-4">
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#00C896]"
-                  >
-                    <Image
-                      src={
-                        testimonials[currentIndex].image || "/placeholder.svg"
-                      }
-                      alt={testimonials[currentIndex].name}
-                      width={64}
-                      height={64}
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-                  <div>
-                    <p className="font-bold text-[#154035]">
-                      {testimonials[currentIndex].name}
+                    {/* Quote */}
+                    <p className="text-gray-700 text-lg leading-relaxed relative z-10 italic">
+                      "{testimonial.quote}"
                     </p>
-                    <p className="text-gray-600">
-                      {testimonials[currentIndex].role}
-                    </p>
+
+                    {/* Profile Section */}
+                    <div className="flex items-center gap-4 mt-8 relative z-10">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-blue-400 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="relative w-16 h-16 rounded-full overflow-hidden border-4 border-cyan-400 bg-gradient-to-br from-cyan-100 to-blue-100">
+                          <Image
+                            src={testimonial.image || "/placeholder-user.jpg"}
+                            alt={testimonial.author}
+                            width={64}
+                            height={64}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-black text-lg">
+                          {testimonial.author}
+                        </p>
+                        <p className="text-gray-500 text-sm">
+                          {testimonial.role}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
-            </AnimatePresence>
+              ))}
+            </div>
           </div>
 
-          {/* Navigation Buttons */}
-          <motion.button
-            whileHover={{ scale: 1.1, x: -2 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() =>
-              setCurrentIndex(
-                (prev) => (prev - 1 + testimonials.length) % testimonials.length
-              )
-            }
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 bg-[#00C896] text-white p-2 rounded-full hover:bg-[#008856]"
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 lg:translate-x-0 w-12 h-12 bg-cyan-400 hover:bg-cyan-500 text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg z-20"
+            aria-label="Previous testimonial"
           >
             <ChevronLeft size={24} />
-          </motion.button>
+          </button>
 
-          <motion.button
-            whileHover={{ scale: 1.1, x: 2 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() =>
-              setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-            }
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 bg-[#00C896] text-white p-2 rounded-full hover:bg-[#008856]"
+          <button
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 lg:translate-x-0 w-12 h-12 bg-cyan-400 hover:bg-cyan-500 text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg z-20"
+            aria-label="Next testimonial"
           >
             <ChevronRight size={24} />
-          </motion.button>
+          </button>
+
+          {/* Dots Navigation */}
+          <div className="flex justify-center gap-3 mt-12">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`transition-all duration-500 rounded-full ${
+                  index === currentIndex
+                    ? "w-8 h-3 bg-cyan-400"
+                    : "w-3 h-3 bg-gray-300 hover:bg-gray-400"
+                }`}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
-
-        {/* Testimonial Indicators */}
-        <motion.div
-          variants={itemVariants}
-          className="flex justify-center gap-2 mt-8"
-        >
-          {testimonials.map((_, i) => (
-            <motion.button
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              animate={{
-                width: i === currentIndex ? 32 : 8,
-                backgroundColor: i === currentIndex ? "#00C896" : "#00C896/30",
-              }}
-              className="h-2 rounded-full transition-all"
-            />
-          ))}
-        </motion.div>
-
-        {/* Counter Section */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-16 text-center bg-gradient-to-r from-[#00C896]/10 to-[#154035]/10 rounded-lg p-12"
-        >
-          <motion.div
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-6xl font-bold text-[#00C896] mb-4"
-          >
-            {counter.toLocaleString()}+
-          </motion.div>
-          <p className="text-gray-700 text-lg">
-            Successful projects & growing community of innovators
-          </p>
-        </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

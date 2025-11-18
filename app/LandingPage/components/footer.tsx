@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { Mail } from 'lucide-react'
+import { motion } from "framer-motion";
+import { Mail } from "lucide-react";
 
 export default function Footer() {
   const containerVariants = {
@@ -12,7 +12,7 @@ export default function Footer() {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 10 },
@@ -21,7 +21,7 @@ export default function Footer() {
       y: 0,
       transition: { duration: 0.6 },
     },
-  }
+  };
 
   return (
     <motion.footer
@@ -37,12 +37,13 @@ export default function Footer() {
           <motion.div variants={itemVariants}>
             <h3
               className="text-2xl font-bold mb-4"
-              style={{ fontFamily: 'Akronim, serif', color: '#00C896' }}
+              style={{ fontFamily: "Akronim, serif", color: "#00C896" }}
             >
               R-seeds
             </h3>
             <p className="text-gray-300 text-sm leading-relaxed">
-              Empowering graduates, Supporting innovations, Connecting opportunities.
+              Empowering graduates, Supporting innovations, Connecting
+              opportunities.
             </p>
           </motion.div>
 
@@ -92,7 +93,9 @@ export default function Footer() {
 
           {/* Newsletter */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-bold mb-4 text-lg">Sign up to our Newsletter later</h4>
+            <h4 className="font-bold mb-4 text-lg">
+              Sign up to our Newsletter later
+            </h4>
             <div className="flex gap-2">
               <input
                 type="email"
@@ -119,5 +122,5 @@ export default function Footer() {
         </motion.div>
       </div>
     </motion.footer>
-  )
+  );
 }
