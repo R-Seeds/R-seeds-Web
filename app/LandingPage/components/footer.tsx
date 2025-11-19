@@ -48,8 +48,8 @@ export default function Footer() {
               />
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
-              Empowering graduates, Supporting innovations, Connecting
-              opportunities.
+              Empowering graduates, Supporting innovations. Building Africa’s
+              next generation of tech leaders.
             </p>
           </motion.div>
 
@@ -58,18 +58,27 @@ export default function Footer() {
             <h4 className="font-bold mb-4 text-lg">Quick Links</h4>
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
-                <a href="#" className="hover:text-[#00C896] transition-colors">
+                <a
+                  href="#hero"
+                  className="hover:text-[#00C896] transition-colors"
+                >
                   Home
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#00C896] transition-colors">
-                  Projects
+                <a
+                  href="#services"
+                  className="hover:text-[#00C896] transition-colors"
+                >
+                  Services
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[#00C896] transition-colors">
-                  About
+                <a
+                  href="#explore-projects"
+                  className="hover:text-[#00C896] transition-colors"
+                >
+                  Explore
                 </a>
               </li>
             </ul>
@@ -81,12 +90,12 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <a href="#" className="hover:text-[#00C896] transition-colors">
-                  About
+                  Donate
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-[#00C896] transition-colors">
-                  Careers
+                  Contact Us
                 </a>
               </li>
               <li>
@@ -111,9 +120,9 @@ export default function Footer() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-4 py-2 bg-[#00C896] text-[#154035] rounded-lg font-semibold hover:bg-[#00C896]/90 transition-colors"
+                className="px-4 py-2 bg-[#FFFFFF] text-[#000000] rounded-lg hover:bg-[#00C896] hover:text-[#FFFFFF] font-semibold transition-colors"
               >
-                <Mail size={20} />
+                <button> Subscribe</button>
               </motion.button>
             </div>
           </motion.div>
