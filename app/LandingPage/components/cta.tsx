@@ -32,7 +32,7 @@ const CTASection = () => {
       style={{ backgroundColor: "#FFFFFF" }}
     >
       {/* Animated spinning circles at top right - partially visible */}
-      <div className="absolute -top-52 -right-16 w-96 h-96 pointer-events-none">
+      <div className="absolute -top-36 -right-44 w-96 h-96 pointer-events-none">
         {/* Outer circle animation */}
         <svg
           className="absolute animate-spin"
