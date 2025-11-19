@@ -279,11 +279,12 @@ const HeroSection = () => {
             {/* Woman image - ABOVE the decorative circles */}
             <div className="relative z-20 w-full">
               <Image
-                src="/women.png"
+                src="/woman.png"
                 alt="woman"
-                width={1200}
-                height={1350}
+                width={1000}
+                height={1150}
                 className="w-full h-auto object-contain scale-110 lg:scale-125"
+                style={{ left: 0}}
                 priority
               />
             </div>
@@ -317,7 +318,7 @@ const HeroSection = () => {
           </div>
 
           {/* Review Counter */}
-          <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-white rounded-full shadow-xl px-4 sm:px-6 md:px-8 py-3 md:py-4 flex items-center gap-2 sm:gap-3 md:gap-4 animate-fadeInUp animation-delay-1000 z-30">
+          <div className="absolute top-[720px] left-full -translate-y-1/2 ml-3 bg-white rounded-full shadow-xl px-4 sm:px-6 md:px-8 py-3 md:py-4 flex items-center gap-2 sm:gap-3 md:gap-4 animate-fadeInUp animation-delay-1000 z-30">
             <div className="flex -space-x-2">
               {["diana.png", "women.png", "glass.jpg", "girl.jpg"].map(
                 (avatar, i) => (
