@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const CTASection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -183,7 +183,8 @@ const CTASection = () => {
             isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
           }`}
         >
-          <button
+          <Link
+            href="/signup"
             className="group relative flex items-center justify-center overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-105 w-full max-w-xs sm:max-w-sm md:max-w-md"
             style={{
               height: "51px",
@@ -220,10 +221,6 @@ const CTASection = () => {
                 >
                   Get Started
                 </span>
-                {/* <ArrowRight
-                  className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
-                  style={{ color: "#FFFFFF" }}
-                /> */}
                 <Image
                   src="/arrow.png"
                   alt="Arrow"
@@ -233,7 +230,7 @@ const CTASection = () => {
                 />
               </div>
             </div>
-          </button>
+          </Link>
         </div>
       </div>
 

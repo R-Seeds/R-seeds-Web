@@ -5,7 +5,7 @@ import type React from "react"
 import { Eye, EyeOff, GraduationCap, DollarSign, Users } from "lucide-react"
 
 interface SignupProps {
-  onBackToLogin: () => void
+  onBackToLogin?: () => void
 }
 
 const Signup = ({ onBackToLogin }: SignupProps) => {
@@ -17,13 +17,22 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [userType, setUserType] = useState("user")
-  
-  
+  const [isMounted, setIsMounted] = useState(false)
 
-  
-  
   useEffect(() => {
-    
+    const timer = requestAnimationFrame(() => setIsMounted(true))
+    return () => cancelAnimationFrame(timer)
+  }, [])
+
+  const handleBackToLogin = () => {
+    if (onBackToLogin) {
+      onBackToLogin()
+    } else {
+      router.push("/login")
+    }
+  }
+
+  useEffect(() => {
     if (pathname && pathname !== "/") return
     try {
       const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"
@@ -34,12 +43,7 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
         else router.replace("/user")
       }
     } catch {}
-  }, [router, pathname, onBackToLogin])
-
-  
-  if (pathname && pathname !== "/") {
-    return null
-  }
+  }, [router, pathname])
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault()
@@ -50,7 +54,7 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
       localStorage.setItem("users", JSON.stringify(users))
       localStorage.setItem("userType", userType)
     } catch {}
-    onBackToLogin()
+    handleBackToLogin()
   }
 
   const handleGoogleSignIn = () => {
@@ -58,40 +62,49 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
   }
 
   return (
-    <div className="flex min-h-screen overflow-x-hidden -mx-4 sm:-mx-6 lg:-mx-8 xl:-mx-12 2xl:-mx-48">
+    <div className="flex min-h-screen flex-col overflow-x-hidden bg-white md:flex-row">
       {/* Left Side  */}
-      <div 
-        className="w-full md:w-[60%] relative h-screen overflow-hidden"
+      <div
+        className="relative hidden md:flex md:w-[60%] lg:w-[58%] xl:w-[55%] h-72 md:h-auto lg:h-screen overflow-hidden bg-[#00b68f] items-center justify-center"
         style={{
           backgroundImage: "url('/login.png')",
-          backgroundSize: "70% 100%",
-          backgroundPosition: "0 0",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
       >
-        {/* Content */}
-        <div className="relative z-10 flex h-full">
-        
-          <div className="flex-1 flex items-center justify-end pr-96">
-            <div className="flex flex-col items-end">
-              <button 
-                onClick={onBackToLogin}
-                className="text-white hover:text-white/80 font-bold text-base transition-colors mb-3 mr-20"
-              >
-                Sign In
-              </button>
-              <button className="bg-white text-teal-600 hover:bg-white/90 font-bold px-8 py-3 rounded-xl shadow-lg text-base transition-all duration-200 w-48 mr-2">
-                Sign Up
-              </button>
-            </div>
+        <div className="absolute inset-0" />
+        <div
+          className={`relative z-10 flex h-full w-full items-center justify-end px-6 md:px-8 lg:px-10 transition-all duration-700 ease-out ${
+            isMounted ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-6"
+          }`}
+        >
+          <div className="flex flex-col gap-3 px-6 py-4 rounded-[32px] translate-x-6 w-44 items-stretch">
+            <button
+              onClick={handleBackToLogin}
+              className="rounded-full border border-white/70 text-white font-semibold py-2 text-base hover:bg-white/10 transition-colors"
+            >
+              Sign In
+            </button>
+            <button className="rounded-full bg-white text-[#00b68f] font-semibold py-2 text-base shadow-md">
+              Sign Up
+            </button>
           </div>
         </div>
       </div>
 
       {/* Right Side */}
-      <div className="hidden md:flex w-[40%] items-center justify-center bg-white p-12">
+      <div
+        className={`flex w-full md:w-[40%] lg:w-[42%] xl:w-[45%] items-center justify-center bg-white p-6 sm:p-10 md:p-12 transition-all duration-700 ease-out ${
+          isMounted ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"
+        }`}
+      >
         <div className="w-full max-w-md">
-          <div className="bg-[#00C896] rounded-2xl p-10 shadow-2xl">
+          <div
+            className={`bg-[#00C896] rounded-2xl p-10 shadow-2xl transition-all duration-700 ease-out ${
+              isMounted ? "scale-100" : "scale-95"
+            }`}
+          >
             <div className="text-center mb-8">
               <h1 className="text-white text-2xl font-bold mb-2">Join R-seeds</h1>
               <p className="text-white text-sm">Empower Innovation from RCA Graduates</p>
@@ -100,34 +113,28 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
             {/* User Type Selection */}
             <div className="flex justify-center mb-8">
               <div className="flex bg-white/20 rounded-lg p-1">
-                <button 
+                <button
                   onClick={() => setUserType("graduate")}
                   className={`px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 ${
-                    userType === "graduate" 
-                      ? "bg-white text-black" 
-                      : "text-white"
+                    userType === "graduate" ? "bg-white text-black" : "text-white"
                   }`}
                 >
                   <GraduationCap className="w-4 h-4" />
                   Graduate
                 </button>
-                <button 
+                <button
                   onClick={() => setUserType("sponsor")}
                   className={`px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 ${
-                    userType === "sponsor" 
-                      ? "bg-white text-black" 
-                      : "text-white"
+                    userType === "sponsor" ? "bg-white text-black" : "text-white"
                   }`}
                 >
                   <DollarSign className="w-4 h-4" />
                   Sponsor
                 </button>
-                <button 
+                <button
                   onClick={() => setUserType("user")}
                   className={`px-4 py-2 text-sm rounded-md font-medium flex items-center gap-2 ${
-                    userType === "user" 
-                      ? "bg-white text-black" 
-                      : "text-white"
+                    userType === "user" ? "bg-white text-black" : "text-white"
                   }`}
                 >
                   <Users className="w-4 h-4" />
@@ -239,3 +246,4 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
 }
 
 export default Signup
+
