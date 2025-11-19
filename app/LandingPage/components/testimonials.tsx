@@ -78,7 +78,7 @@ export default function Testimonials() {
       ref={sectionRef}
       className="w-full py-20 bg-gradient-to-b from-white to-blue-50/30"
     >
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="w-full px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16">
         <h2 className="text-5xl font-bold text-center mb-16 text-black animate-fade-in-up">
           What Donors & Graduates Say
         </h2>

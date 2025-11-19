@@ -25,13 +25,14 @@ export default function Footer() {
 
   return (
     <motion.footer
+      id="footer"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="bg-[#154035] text-white py-16 px-6"
+      className="bg-[#154035] text-white py-16 px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <motion.div variants={itemVariants}>

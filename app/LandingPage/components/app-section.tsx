@@ -29,6 +29,7 @@ const AppSection = () => {
 
   return (
     <section 
+      id="app-section"
       ref={sectionRef}
       className="relative w-full bg-gradient-to-br bg-gray-100 py-12 md:py-16 lg:py-24 overflow-hidden"
     >
@@ -56,7 +57,7 @@ const AppSection = () => {
         </div>
       ))}
 
-      <div className="relative z-10 max-w-[2000px] mx-auto px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-32">
+      <div className="relative z-10 w-full px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16">
         {/* Download Our App Title */}
         <div className={`text-center mb-8 md:mb-12 lg:mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 

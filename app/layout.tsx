@@ -28,8 +28,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`min-h-screen bg-white text-gray-900 antialiased ${inter.className} relative`}>
         <div className="min-h-screen flex flex-col relative">
-          <main className="flex-1 w-full max-w-[1920px] mx-auto">
-            <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+          <main className="flex-1 w-full">
+            <div className="w-full">
               {children}
             </div>
           </main>

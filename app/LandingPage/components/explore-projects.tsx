@@ -49,8 +49,8 @@ export default function ExploreProjects() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full py-20" style={{ backgroundColor: '#1976D20A' }}>
-      <div className="max-w-full px-8 lg:px-16">
+    <section id="explore-projects" ref={sectionRef} className="w-full py-20" style={{ backgroundColor: '#1976D20A' }}>
+      <div className="w-full px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16">
         <h2 className="text-5xl font-bold text-center mb-16 text-black animate-fade-in-up">
           Explore Projects
         </h2>
@@ -70,14 +70,14 @@ export default function ExploreProjects() {
             >
               <div className="lg:w-3/5 flex justify-center">
                 <div className="relative w-full">
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-400/20 to-teal-400/20 rounded-[4rem] blur-2xl animate-pulse"></div>
-                  <div className="relative overflow-hidden rounded-[4rem] border-2 border-transparent hover:border-green-400/50 transition-all duration-500 hover:shadow-2xl hover:shadow-green-400/20 group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-400/20 to-teal-400/20 rounded-tl-[4rem] blur-2xl animate-pulse"></div>
+                  <div className="relative overflow-hidden rounded-none rounded-tl-[4rem] border-2 border-transparent hover:border-green-400/50 transition-all duration-500 hover:shadow-2xl hover:shadow-green-400/20 group">
                     <Image
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
                       width={300}
                       height={100}
-                      className="w-full h-[600px] object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-[450px] object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
@@ -85,8 +85,8 @@ export default function ExploreProjects() {
               </div>
 
               <div className="lg:w-2/5 space-y-6 animate-slide-in-right" style={{ transitionDelay: `${index * 150 + 100}ms` }}>
-                <h3 className="text-4xl font-bold text-black">{project.title}</h3>
-                <p className="text-lg text-gray-600 leading-relaxed">{project.description}</p>
+                <h3 className="text-5xl font-bold text-black">{project.title}</h3>
+                <p className="text-xl text-gray-700 leading-relaxed">{project.description}</p>
 
                 <div className="space-y-4 pt-4">
                   <div className="flex items-center gap-3">
@@ -94,8 +94,8 @@ export default function ExploreProjects() {
                       👤
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500">Created By</p>
-                      <p className="font-semibold text-black">{project.creator}</p>
+                      <p className="text-base text-gray-500">Created By</p>
+                      <p className="text-lg font-semibold text-black">{project.creator}</p>
                     </div>
                   </div>
 
@@ -104,8 +104,8 @@ export default function ExploreProjects() {
                       ✓
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500">Status</p>
-                      <p className="font-semibold text-black">{project.status}</p>
+                      <p className="text-base text-gray-500">Status</p>
+                      <p className="text-lg font-semibold text-black">{project.status}</p>
                     </div>
                   </div>
 
@@ -114,13 +114,13 @@ export default function ExploreProjects() {
                       💰
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500">Goal</p>
-                      <p className="font-semibold text-black">{project.goal}</p>
+                      <p className="text-base text-gray-500">Goal</p>
+                      <p className="text-lg font-semibold text-black">{project.goal}</p>
                     </div>
                   </div>
                 </div>
 
-                <button className="mt-8 px-6 py-2 bg-black text-white font-semibold rounded-full hover:bg-[#154035] transition-all duration-300 transform hover:scale-105 group inline-flex items-center gap-2">
+                <button className="mt-8 px-6 py-3 bg-black text-white text-lg font-semibold rounded-full hover:bg-[#154035] transition-all duration-300 transform hover:scale-105 group inline-flex items-center gap-2">
                   View Project
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </button>

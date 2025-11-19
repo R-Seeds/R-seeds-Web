@@ -72,8 +72,9 @@ export default function WhatWeOffer() {
 
   return (
     <section
+      id="services"
       ref={containerRef}
-      className="relative w-full overflow-hidden px-6 py-20 lg:px-12 lg:py-32"
+      className="relative w-full overflow-hidden px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 py-20 lg:py-32"
       style={{ backgroundColor: "#154035" }}
     >
       <div className="absolute inset-0 overflow-hidden opacity-20">
@@ -121,22 +122,57 @@ export default function WhatWeOffer() {
             </p>
           </div>
 
-          <button
-            className={`group inline-flex items-center gap-2 px-2 py-2 rounded-full bg-white text-[#154035] font-semibold hover:bg-opacity-90 transition-all duration-300 hover:shadow-lg transform ${
+          <div
+            className={`flex ${
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-4"
-            }`}
-            style={{
-              transitionDelay: "300ms",
-              animation: isVisible
-                ? "buttonPulse 2s ease-in-out infinite"
-                : "none",
-            }}
+            } transition-all duration-700`}
+            style={{ transitionDelay: "300ms" }}
           >
-            Get Started
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
+            <button
+              className="group relative flex items-center justify-center overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-105"
+              style={{
+                width: "231px",
+                height: "51px",
+                borderRadius: "30px",
+                backgroundColor: "#FFFFFF",
+              }}
+            >
+              {/* Inner border */}
+              <div
+                className="absolute flex items-center justify-center"
+                style={{
+                  width: "220px",
+                  height: "43px",
+                  borderRadius: "25.4px",
+                  border: "0.5px solid #154035",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                <div className="relative flex items-center gap-2">
+                  <span
+                    style={{
+                      fontFamily: "Poppins, sans-serif",
+                      fontWeight: 400,
+                      fontSize: "18px",
+                      lineHeight: "30px",
+                      letterSpacing: "0px",
+                      color: "#154035",
+                    }}
+                  >
+                    Get Started
+                  </span>
+                  <ArrowRight
+                    className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                    style={{ color: "#154035" }}
+                  />
+                </div>
+              </div>
+            </button>
+          </div>
         </div>
 
         {/* Right Content - Features with Curved Line */}

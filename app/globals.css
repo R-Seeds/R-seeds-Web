@@ -302,4 +302,53 @@ body,
   .animate-scale-in {
     animation: scaleIn 0.5s ease-out;
   }
+
+  @keyframes float-circle-1 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.3;
+    }
+    33% {
+      transform: translate(-20px, -30px) scale(1.1);
+      opacity: 0.4;
+    }
+    66% {
+      transform: translate(10px, -20px) scale(0.95);
+      opacity: 0.35;
+    }
+  }
+
+  @keyframes float-circle-2 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.25;
+    }
+    50% {
+      transform: translate(-15px, -25px) scale(1.15);
+      opacity: 0.35;
+    }
+  }
+
+  @keyframes float-circle-3 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.2;
+    }
+    50% {
+      transform: translate(-10px, -15px) scale(1.2);
+      opacity: 0.3;
+    }
+  }
+
+  .circle-1 {
+    animation: float-circle-1 8s ease-in-out infinite;
+  }
+
+  .circle-2 {
+    animation: float-circle-2 6s ease-in-out infinite 1.5s;
+  }
+
+  .circle-3 {
+    animation: float-circle-3 7s ease-in-out infinite 3s;
+  }
 }

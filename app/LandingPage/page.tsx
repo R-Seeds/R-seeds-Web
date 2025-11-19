@@ -12,7 +12,7 @@ import Footer from '@/app/LandingPage/components/footer'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className=" bg-white">
       {/* <Header /> */}
       <Hero />
       <AppSection />

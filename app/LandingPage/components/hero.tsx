@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 const HeroSection = () => {
@@ -26,10 +27,29 @@ const HeroSection = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const navItems = ['Home', 'Our App', 'Services', 'Explore Projects'];
+  const navItems = ['Home', 'Our App', 'Services', 'Explore Projects', 'Footer'];
+
+  const sectionMap: Record<string, string> = {
+    Home: 'hero',
+    'Our App': 'app-section',
+    Services: 'services',
+    'Explore Projects': 'explore-projects',
+    Footer: 'footer',
+  };
+
+  const handleNavClick = (item: string) => {
+    setActiveNav(item);
+    const sectionId = sectionMap[item];
+    if (sectionId) {
+      const target = document.getElementById(sectionId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
-    <div className="relative min-h-screen w-full bg-gradient-to-br bg-white overflow-hidden">
+    <div id="hero" className="relative min-h-screen w-full bg-gradient-to-br bg-white overflow-hidden">
       {/* Animated Background Circles - Full Page */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-20 left-10 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-teal-200 rounded-full opacity-30 animate-blob"></div>
@@ -56,7 +76,7 @@ const HeroSection = () => {
       ))}
 
       {/* Navbar */}
-      <nav className="relative z-50 flex items-center justify-between px-4 md:px-6 lg:px-8 py-4 md:py-6 animate-fadeInDown">
+      <nav className="relative z-50 flex items-center justify-between px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 py-4 md:py-6 animate-fadeInDown">
         <div className="flex items-center gap-1">
           <span className="text-2xl md:text-[32px] font-normal text-[#00C896]" style={{ fontFamily: 'Akronim, cursive' }}>
             R
@@ -71,11 +91,11 @@ const HeroSection = () => {
           {navItems.map((item) => (
             <button
               key={item}
-              onClick={() => setActiveNav(item)}
-              className={`px-3 xl:px-4 py-2 rounded-lg transition-all duration-300 ${
+              onClick={() => handleNavClick(item)}
+              className={`px-3 xl:px-4 py-2 border-b-2 transition-all duration-300 ${
                 activeNav === item
-                  ? 'bg-[#154035] text-white font-bold'
-                  : 'text-[#111111] font-medium hover:bg-gray-200'
+                  ? 'text-[#154035] font-semibold border-[#154035]'
+                  : 'text-[#111111] font-medium border-transparent hover:border-[#154035]'
               }`}
               style={{
                 fontFamily: 'Poppins, sans-serif',
@@ -89,7 +109,8 @@ const HeroSection = () => {
         </div>
 
         <div className="flex items-center gap-2 md:gap-4">
-          <button
+          <Link
+            href="/login"
             className="px-3 md:px-6 py-1.5 md:py-2 text-sm md:text-base rounded-lg border border-black bg-white text-black transition-transform hover:scale-105"
             style={{
               fontFamily: 'Afacad, sans-serif',
@@ -98,8 +119,9 @@ const HeroSection = () => {
             }}
           >
             Login
-          </button>
-          <button
+          </Link>
+          <Link
+            href="/signup"
             className="px-3 md:px-6 py-1.5 md:py-2 text-sm md:text-base rounded-lg border border-white bg-[#154035] text-white transition-transform hover:scale-105"
             style={{
               fontFamily: 'Afacad, sans-serif',
@@ -107,13 +129,13 @@ const HeroSection = () => {
               lineHeight: '30px'
             }}
           >
-            Get Started
-          </button>
+            Sign Up
+          </Link>
         </div>
       </nav>
 
       {/* Hero Content */}
-      <div className="relative z-30 flex flex-col lg:flex-row items-center justify-between px-0 py-6 md:py-8 lg:py-12 gap-8 lg:gap-0 w-full">
+      <div className="relative z-30 flex flex-col lg:flex-row items-center justify-between px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6 md:py-8 lg:py-12 gap-8 lg:gap-0 w-full">
         {/* Left Side - Image */}
         <div className="w-full lg:w-1/2 relative animate-fadeInLeft order-2 lg:order-1">
           <div className="relative w-full max-w-none mx-auto lg:mx-0">
@@ -228,17 +250,44 @@ const HeroSection = () => {
             </button>
 
             {/* Discover & Fund Projects button */}
-            <button className="group relative bg-[#DDF8F14D] rounded-[30px] px-4 sm:px-6 md:px-8 py-2.5 md:py-3 flex items-center justify-center gap-2 md:gap-3 transition-transform hover:scale-105 hover:shadow-lg w-full sm:w-auto">
-              <span
-                className="text-[#000000] whitespace-nowrap text-sm sm:text-base md:text-lg"
+            <button
+              className="group relative flex items-center justify-center overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-105 w-full sm:w-auto"
+              style={{
+                width: "231px",
+                height: "51px",
+                borderRadius: "30px",
+                backgroundColor: "#FFFFFF",
+              }}
+            >
+              <div
+                className="absolute flex items-center justify-center"
                 style={{
-                  fontFamily: 'Poppins, sans-serif',
-                  lineHeight: '30px'
+                  width: "220px",
+                  height: "43px",
+                  borderRadius: "25.4px",
+                  border: "0.5px solid #154035",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
                 }}
               >
-                Discover & Fund Projects
-              </span>
-              <ArrowRight className="w-5 h-5 md:w-6 md:h-6 text-[#154035] transition-transform group-hover:translate-x-1" />
+                <div className="relative flex items-center gap-2 md:gap-3">
+                  <span
+                    className="text-sm sm:text-base md:text-lg whitespace-nowrap"
+                    style={{
+                      fontFamily: "Poppins, sans-serif",
+                      lineHeight: "30px",
+                      color: "#154035",
+                    }}
+                  >
+                    Discover & Fund Projects
+                  </span>
+                  <ArrowRight
+                    className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:translate-x-1"
+                    style={{ color: "#154035" }}
+                  />
+                </div>
+              </div>
             </button>
           </div>
         </div>
