@@ -92,7 +92,7 @@ export default function Testimonials() {
             >
               {testimonials.map((testimonial, index) => (
                 <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
-                  <div className="bg-white border-2 border-cyan-400 rounded-2xl p-8 min-h-72 flex flex-col justify-between relative overflow-hidden group hover:shadow-xl transition-all duration-500">
+                  <div className="bg-white border-2 border-[#00C896] rounded-2xl p-8 min-h-72 flex flex-col justify-between relative overflow-hidden group hover:shadow-xl transition-all duration-500">
                     <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                     {/* Quote */}
@@ -104,7 +104,7 @@ export default function Testimonials() {
                     <div className="flex items-center gap-4 mt-8 relative z-10">
                       <div className="relative">
                         <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-blue-400 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="relative w-16 h-16 rounded-full overflow-hidden border-4 border-cyan-400 bg-gradient-to-br from-cyan-100 to-blue-100">
+                        <div className="relative w-16 h-16 rounded-full overflow-hidden border-4 border-[#00C896] bg-gradient-to-br from-cyan-100 to-blue-100">
                           <Image
                             src={testimonial.image || "/placeholder-user.jpg"}
                             alt={testimonial.author}
@@ -132,7 +132,7 @@ export default function Testimonials() {
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 lg:translate-x-0 w-12 h-12 bg-cyan-400 hover:bg-cyan-500 text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg z-20"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 lg:translate-x-0 w-12 h-12 bg-[#00C896] hover:bg-[#154035] text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg z-20"
             aria-label="Previous testimonial"
           >
             <ChevronLeft size={24} />
@@ -140,7 +140,7 @@ export default function Testimonials() {
 
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 lg:translate-x-0 w-12 h-12 bg-cyan-400 hover:bg-cyan-500 text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg z-20"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 lg:translate-x-0 w-12 h-12 bg-[#00C896] hover:bg-[#154035] text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg z-20"
             aria-label="Next testimonial"
           >
             <ChevronRight size={24} />
@@ -154,7 +154,7 @@ export default function Testimonials() {
                 onClick={() => goToSlide(index)}
                 className={`transition-all duration-500 rounded-full ${
                   index === currentIndex
-                    ? "w-8 h-3 bg-cyan-400"
+                    ? "w-8 h-3 bg-[#00C896]"
                     : "w-3 h-3 bg-gray-300 hover:bg-gray-400"
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
