@@ -1,15 +1,20 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import type React from "react"
+import { useRouter } from "next/navigation"
 import { Eye, EyeOff } from "lucide-react"
-import Signup from "../components/SignUp"
-
 
 const Login = () => {
+  const router = useRouter()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
-  const [showSignup, setShowSignup] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    const timer = requestAnimationFrame(() => setIsMounted(true))
+    return () => cancelAnimationFrame(timer)
+  }, [])
 
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault()
@@ -37,59 +42,58 @@ const Login = () => {
   }
 
   const handleSignUpClick = () => {
-    
     try {
       localStorage.removeItem("isLoggedIn")
-      
-  
     } catch {}
-    setShowSignup(true)
-  }
-
-  const handleBackToLogin = () => {
-    setShowSignup(false)
-  }
-
-  if (showSignup) {
-    return <Signup onBackToLogin={handleBackToLogin} />
+    router.push("/signup")
   }
 
   return (
-    <div className="flex min-h-screen overflow-x-hidden -mx-4 sm:-mx-6 lg:-mx-8 xl:-mx-12 2xl:-mx-48">
+    <div className="flex min-h-screen flex-col overflow-x-hidden bg-white md:flex-row">
       {/* Left Side */}
       <div 
-        className="w-full md:w-[60%] relative h-screen overflow-hidden"
+        className="relative hidden md:flex md:w-[60%] lg:w-[58%] xl:w-[55%] h-72 md:h-auto lg:h-screen overflow-hidden bg-[#00b68f] items-center justify-center"
         style={{
           backgroundImage: "url('/login.png')",
-          backgroundSize: "70% 100%",
-          backgroundPosition: "0 0",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
       >
-
-        {/* Content */}
-        <div className="relative z-10 flex h-full">
-          
-          <div className="flex-1 flex items-center justify-end pr-96">
-            <div className="flex flex-col items-end">
-              <button className="bg-white text-teal-600 hover:bg-white/90 font-bold px-8 py-3 rounded-xl shadow-lg text-base transition-all duration-200 mb-3 w-48 mr-2 ">
-                Sign In
-              </button>
-              <button 
-                onClick={handleSignUpClick}
-                className="text-white hover:text-white/80 font-bold text-base transition-colors mr-16"
-              >
-                Sign Up
-              </button>
-            </div>
+        <div className="absolute inset-0 " />
+        <div
+          className={`relative z-10 flex h-full w-full items-center justify-between px-6 md:px-8 lg:px-10 transition-all duration-700 ease-out "
+          `}
+        >
+          <div className="text-white">
+            
+          </div>
+          <div className="flex flex-col gap-3 px-6 py-4 rounded-[32px] translate-x-6 w-44 items-stretch">
+            <button className="rounded-full bg-white text-[#00b68f] font-semibold py-2 text-base shadow-md">
+              Sign In
+            </button>
+            <button
+              onClick={handleSignUpClick}
+              className="rounded-full border border-white/70 text-white font-semibold py-2 text-base hover:bg-white/10 transition-colors"
+            >
+              Sign Up
+            </button>
           </div>
         </div>
       </div>
 
       {/* Right Side */}
-      <div className="hidden md:flex w-[40%] items-center justify-center bg-white p-12">
+      <div
+        className={`flex w-full md:w-[40%] lg:w-[42%] xl:w-[45%] items-center justify-center bg-white p-6 sm:p-10 md:p-12 transition-all duration-700 ease-out ${
+          isMounted ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"
+        }`}
+      >
         <div className="w-full max-w-md">
-          <div className="bg-[#00C896] rounded-2xl p-10 shadow-2xl">
+          <div
+            className={`bg-[#00C896] rounded-2xl p-10 shadow-2xl transition-all duration-700 ease-out ${
+              isMounted ? "scale-100" : "scale-95"
+            }`}
+          >
             <h1 className="text-white text-2xl font-bold mb-8 text-center">Welcome Back!</h1>
 
             <form onSubmit={handleSignIn} className="space-y-5">
