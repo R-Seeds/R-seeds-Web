@@ -61,8 +61,8 @@ const AppSection = () => {
         {/* Download Our App Title */}
         <div className={`text-center mb-8 md:mb-12 lg:mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-black"
-          style={{ fontFamily: 'Poppins, sans-serif' }}
+            className="font-bold text-black leading-tight text-balance mx-auto max-w-3xl"
+            style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(28px, 5vw, 48px)' }}
           >
             <span className={`inline-block ${isVisible ? 'animate-word-fade' : ''}`}>Download</span>{' '}
             <span className={`inline-block ${isVisible ? 'animate-word-fade animation-delay-200' : ''}`}>Our</span>{' '}
@@ -70,21 +70,21 @@ const AppSection = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 xl:gap-16 items-center">
           {/* Left Side - Content */}
           <div className={`space-y-6 md:space-y-8 order-2 lg:order-1 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             <div>
               <h3 
-                className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4"
-                style={{ fontFamily: 'Poppins, sans-serif' }}
+                className="font-bold text-black mb-4 leading-tight text-balance"
+                style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(26px, 4vw, 50px)' }}
               >
                 <span className={`inline-block ${isVisible ? 'animate-slide-up' : ''}`}>Your</span>{' '}
                 <span className={`inline-block ${isVisible ? 'animate-slide-up animation-delay-100' : ''}`}>Gateway</span>{' '}
                 <span className={`inline-block ${isVisible ? 'animate-slide-up animation-delay-200' : ''}`}>To</span>
               </h3>
               <h3 
-                className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6"
-                style={{ fontFamily: 'Poppins, sans-serif' }}
+                className="font-bold text-black mb-6 leading-tight text-balance"
+                style={{ fontFamily: 'Poppins, sans-serif', fontSize: 'clamp(26px, 4vw, 50px)' }}
               >
                 <span className={`inline-block ${isVisible ? 'animate-slide-up animation-delay-300' : ''}`}>Tech</span>{' '}
                 <span className={`inline-block ${isVisible ? 'animate-slide-up animation-delay-400' : ''}`}>Opportunities</span>
@@ -102,7 +102,7 @@ const AppSection = () => {
             </h4>
 
             <p 
-              className="text-base md:text-lg text-gray-700 leading-relaxed"
+              className="text-base md:text-lg text-gray-700 leading-relaxed text-balance"
               style={{ fontFamily: 'Poppins, sans-serif' }}
             >
               Discover groundbreaking projects from RCA graduates, follow their journeys from idea to impact, track real-time funding progress, and contribute directly to the next generation of African innovators — all from the convenience of your mobile device.
@@ -157,7 +157,7 @@ const AppSection = () => {
 
           {/* Right Side - Phone Images */}
           <div className={`relative order-1 lg:order-2 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-            <div className="relative max-w-[600px] mx-auto lg:ml-auto lg:mr-0">
+            <div className="relative max-w-[520px] sm:max-w-[600px] mx-auto lg:ml-auto lg:mr-0 px-4 sm:px-0">
               {/* Animated circles behind phones */}
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-br from-teal-300 to-emerald-200 rounded-full opacity-30 animate-pulse-slow -z-10"></div>
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] md:w-[450px] md:h-[450px] bg-gradient-to-br from-cyan-200 to-teal-100 rounded-full opacity-25 animate-pulse-slow animation-delay-1000 -z-10"></div>
@@ -169,7 +169,7 @@ const AppSection = () => {
                   alt="R-seeds mobile app" 
                   width={700} 
                   height={700}
-                  className="w-full h-auto"
+                  className="w-full h-auto max-w-xs sm:max-w-none mx-auto"
                   priority
                 />
               </div>

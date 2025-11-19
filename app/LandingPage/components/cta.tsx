@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 const CTASection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -125,11 +126,11 @@ const CTASection = () => {
         <h2
           className={`text-center mb-6 md:mb-8 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          } text-balance mx-auto max-w-4xl`}
           style={{
             fontFamily: "Poppins, sans-serif",
             fontWeight: 700,
-            fontSize: "clamp(28px, 5vw, 40px)",
+            fontSize: "clamp(28px, 5vw, 44px)",
             lineHeight: "1.4",
             letterSpacing: "0px",
             color: "#154035",
@@ -158,7 +159,7 @@ const CTASection = () => {
         <p
           className={`text-center max-w-4xl mx-auto mb-8 md:mb-12 px-4 transition-all duration-700 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          } text-balance`}
           style={{
             fontFamily: "Poppins, sans-serif",
             fontWeight: 400,
@@ -183,9 +184,8 @@ const CTASection = () => {
           }`}
         >
           <button
-            className="group relative flex items-center justify-center overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-105"
+            className="group relative flex items-center justify-center overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-105 w-full max-w-xs sm:max-w-sm md:max-w-md"
             style={{
-              width: "231px",
               height: "51px",
               borderRadius: "30px",
               backgroundColor: "#154035",
@@ -198,8 +198,8 @@ const CTASection = () => {
             <div
               className="absolute flex items-center justify-center"
               style={{
-                width: "220px",
-                height: "43px",
+                width: "calc(100% - 12px)",
+                height: "calc(100% - 12px)",
                 borderRadius: "25.4px",
                 border: "0.5px solid #FFFFFF",
                 top: "50%",
@@ -220,9 +220,16 @@ const CTASection = () => {
                 >
                   Get Started
                 </span>
-                <ArrowRight
+                {/* <ArrowRight
                   className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
                   style={{ color: "#FFFFFF" }}
+                /> */}
+                <Image
+                  src="/arrow.png"
+                  alt="Arrow"
+                  width={20}
+                  height={20}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
                 />
               </div>
             </div>

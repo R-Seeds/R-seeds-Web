@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 
@@ -33,15 +34,19 @@ export default function Footer() {
       className="bg-[#154035] text-white py-16 px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16"
     >
       <div className="w-full">
-        <div className="grid md:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-12">
           {/* Brand */}
           <motion.div variants={itemVariants}>
-            <h3
-              className="text-2xl font-bold mb-4"
-              style={{ fontFamily: "Akronim, serif", color: "#00C896" }}
-            >
-              R-seeds
-            </h3>
+            <div className="mb-4">
+              <Image
+                src="/logo.png"
+                alt="R-seeds"
+                width={180}
+                height={60}
+                className="h-12 w-auto object-contain"
+                priority
+              />
+            </div>
             <p className="text-gray-300 text-sm leading-relaxed">
               Empowering graduates, Supporting innovations, Connecting
               opportunities.

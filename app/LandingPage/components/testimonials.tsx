@@ -79,7 +79,7 @@ export default function Testimonials() {
       className="w-full py-20 bg-gradient-to-b from-white to-blue-50/30"
     >
       <div className="w-full px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16">
-        <h2 className="text-5xl font-bold text-center mb-16 text-black animate-fade-in-up">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-10 sm:mb-16 text-black animate-fade-in-up text-balance">
           What Donors & Graduates Say
         </h2>
 
@@ -92,19 +92,19 @@ export default function Testimonials() {
             >
               {testimonials.map((testimonial, index) => (
                 <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
-                  <div className="bg-white border-2 border-[#00C896] rounded-2xl p-8 min-h-72 flex flex-col justify-between relative overflow-hidden group hover:shadow-xl transition-all duration-500">
+                  <div className="bg-white border-2 border-[#00C896] rounded-2xl p-6 sm:p-8 min-h-72 flex flex-col justify-between relative overflow-hidden group hover:shadow-xl transition-all duration-500">
                     <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                     {/* Quote */}
-                    <p className="text-gray-700 text-lg leading-relaxed relative z-10 italic">
+                    <p className="text-gray-700 text-base sm:text-lg leading-relaxed relative z-10 italic text-balance">
                       "{testimonial.quote}"
                     </p>
 
                     {/* Profile Section */}
-                    <div className="flex items-center gap-4 mt-8 relative z-10">
+                    <div className="flex items-center gap-4 mt-6 sm:mt-8 relative z-10">
                       <div className="relative">
                         <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-blue-400 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="relative w-16 h-16 rounded-full overflow-hidden border-4 border-[#00C896] bg-gradient-to-br from-cyan-100 to-blue-100">
+                        <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-4 border-[#00C896] bg-gradient-to-br from-cyan-100 to-blue-100">
                           <Image
                             src={testimonial.image || "/placeholder-user.jpg"}
                             alt={testimonial.author}
@@ -115,10 +115,10 @@ export default function Testimonials() {
                         </div>
                       </div>
                       <div>
-                        <p className="font-semibold text-black text-lg">
+                        <p className="font-semibold text-black text-base sm:text-lg">
                           {testimonial.author}
                         </p>
-                        <p className="text-gray-500 text-sm">
+                        <p className="text-gray-500 text-xs sm:text-sm">
                           {testimonial.role}
                         </p>
                       </div>
@@ -132,19 +132,40 @@ export default function Testimonials() {
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 lg:translate-x-0 w-12 h-12 bg-[#00C896] hover:bg-[#154035] text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg z-20"
+            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 lg:translate-x-0 w-12 h-12 bg-[#00C896] hover:bg-[#154035] text-white rounded-full items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg z-20"
             aria-label="Previous testimonial"
           >
-            <ChevronLeft size={24} />
+            {/* <ChevronLeft size={24} /> */}
+            <Image src="/arrow1.png" alt="Arrow" width={20} height={20}/>
           </button>
 
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 lg:translate-x-0 w-12 h-12 bg-[#00C896] hover:bg-[#154035] text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg z-20"
+            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 lg:translate-x-0 w-12 h-12 bg-[#00C896] hover:bg-[#154035] text-white rounded-full items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg z-20"
             aria-label="Next testimonial"
           >
-            <ChevronRight size={24} />
+            {/* <ChevronRight size={24} /> */}
+            <Image src="/arrow.png" alt="arrow" width={20} height={20}/>
           </button>
+
+          <div className="flex md:hidden justify-center gap-4 mt-6">
+            <button
+              onClick={prevSlide}
+              className="w-10 h-10 rounded-full bg-[#00C896] text-white flex items-center justify-center"
+              aria-label="Previous testimonial mobile"
+            >
+              {/* <ChevronLeft size={20} /> */}
+              <Image src="/arrow1.png" alt="Arrow" width={20} height={20}/>
+            </button>
+            <button
+              onClick={nextSlide}
+              className="w-10 h-10 rounded-full bg-[#00C896] text-white flex items-center justify-center"
+              aria-label="Next testimonial mobile"
+            >
+              {/* <ChevronRight size={20} /> */}
+              <Image src="/arrow.png" alt="arrow" width={20} height={20}/>
+            </button>
+          </div>
 
           {/* Dots Navigation */}
           <div className="flex justify-center gap-3 mt-12">

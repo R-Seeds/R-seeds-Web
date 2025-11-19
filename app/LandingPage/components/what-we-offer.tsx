@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 interface FeatureItem {
   id: number;
@@ -107,13 +108,13 @@ export default function WhatWeOffer() {
             isVisible
               ? "opacity-100 translate-x-0"
               : "opacity-0 -translate-x-10"
-          }`}
+          } text-center lg:text-left`}
         >
           <div className="space-y-4">
-            <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight text-balance">
               What We Offer
             </h2>
-            <p className="text-lg leading-relaxed text-white text-opacity-90 max-w-md">
+            <p className="text-base sm:text-lg leading-relaxed text-white text-opacity-90 max-w-2xl lg:max-w-md mx-auto lg:mx-0">
               This platform was created to empower Rwanda Coding Academy (RCA)
               graduates by giving them a space to share their innovative
               projects, connect with global donors, and bring their ideas to
@@ -127,13 +128,12 @@ export default function WhatWeOffer() {
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-4"
-            } transition-all duration-700`}
+            } transition-all duration-700 justify-center lg:justify-start`}
             style={{ transitionDelay: "300ms" }}
           >
             <button
-              className="group relative flex items-center justify-center overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-105"
+              className="group relative flex items-center justify-center overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-105 w-full max-w-xs sm:max-w-sm"
               style={{
-                width: "231px",
                 height: "51px",
                 borderRadius: "30px",
                 backgroundColor: "#FFFFFF",
@@ -143,8 +143,8 @@ export default function WhatWeOffer() {
               <div
                 className="absolute flex items-center justify-center"
                 style={{
-                  width: "220px",
-                  height: "43px",
+                  width: "calc(100% - 12px)",
+                  height: "calc(100% - 12px)",
                   borderRadius: "25.4px",
                   border: "0.5px solid #154035",
                   top: "50%",
@@ -165,9 +165,16 @@ export default function WhatWeOffer() {
                   >
                     Get Started
                   </span>
-                  <ArrowRight
+                  {/* <ArrowRight
                     className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
                     style={{ color: "#154035" }}
+                  /> */}
+                  <Image
+                    src="/arrow3.png"
+                    alt="Arrow"
+                    height={20}
+                    width={20}
+                    className="transition-transform duration-300 group-hover:translate-x-1"
                   />
                 </div>
               </div>
