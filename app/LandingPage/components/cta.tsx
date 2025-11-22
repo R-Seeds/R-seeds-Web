@@ -28,11 +28,11 @@ const CTASection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-16 md:py-20 lg:py-24 overflow-hidden"
+      className="relative w-full py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 overflow-hidden max-w-[1920px] mx-auto"
       style={{ backgroundColor: "#FFFFFF" }}
     >
       {/* Animated spinning circles at top right - partially visible */}
-      <div className="absolute -top-36 -right-44 w-96 h-96 pointer-events-none">
+      <div className="absolute -top-[clamp(100px,15vw,144px)] -right-[clamp(100px,15vw,176px)] w-[clamp(200px,30vw,384px)] h-[clamp(200px,30vw,384px)] pointer-events-none">
         {/* Outer circle animation */}
         <svg
           className="absolute animate-spin"
@@ -41,8 +41,8 @@ const CTASection = () => {
             animationDirection: "reverse",
           }}
           viewBox="0 0 200 200"
-          width="384"
-          height="384"
+          width="100%"
+          height="100%"
         >
           <circle
             cx="100"
@@ -50,7 +50,7 @@ const CTASection = () => {
             r="80"
             fill="none"
             stroke="#154035"
-            strokeWidth="30"
+            strokeWidth="clamp(15,2vw,30)"
             opacity="0.8"
           />
         </svg>
@@ -60,12 +60,12 @@ const CTASection = () => {
           className="absolute animate-spin"
           style={{
             animationDuration: "15s",
-            top: "32px",
-            left: "32px",
+            top: "8%",
+            left: "8%",
+            width: "83%",
+            height: "83%",
           }}
           viewBox="0 0 200 200"
-          width="320"
-          height="320"
         >
           <circle
             cx="100"
@@ -73,7 +73,7 @@ const CTASection = () => {
             r="50"
             fill="none"
             stroke="#154035"
-            strokeWidth="25"
+            strokeWidth="clamp(12,1.8vw,25)"
             opacity="0.9"
           />
         </svg>
@@ -83,12 +83,12 @@ const CTASection = () => {
           className="absolute animate-spin"
           style={{
             animationDuration: "12s",
-            top: "64px",
-            left: "64px",
+            top: "16%",
+            left: "16%",
+            width: "67%",
+            height: "67%",
           }}
           viewBox="0 0 200 200"
-          width="256"
-          height="256"
         >
           <circle
             cx="100"
@@ -96,7 +96,7 @@ const CTASection = () => {
             r="40"
             fill="none"
             stroke="#154035"
-            strokeWidth="20"
+            strokeWidth="clamp(10,1.5vw,20)"
             opacity="0.85"
           />
         </svg>
@@ -105,10 +105,10 @@ const CTASection = () => {
         <div
           className="absolute rounded-full bg-white"
           style={{
-            width: "24px",
-            height: "24px",
-            top: "192px",
-            left: "192px",
+            width: "clamp(12px,1.5vw,24px)",
+            height: "clamp(12px,1.5vw,24px)",
+            top: "50%",
+            left: "50%",
             transform: "translate(-50%, -50%)",
             zIndex: 10,
           }}
@@ -116,22 +116,22 @@ const CTASection = () => {
 
         {/* Light accent bar */}
         <div
-          className="absolute w-8 h-40 bg-[#b8e6d5] rounded-full blur-sm opacity-70"
-          style={{ top: "48px", right: "0" }}
+          className="absolute w-[clamp(16px,2vw,32px)] h-[clamp(80px,10vw,160px)] bg-[#b8e6d5] rounded-full blur-sm opacity-70"
+          style={{ top: "12%", right: "0" }}
         />
       </div>
 
-      <div className="w-full px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 relative z-10">
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16 3xl:px-20 relative z-10">
         {/* Heading with word animation */}
         <h2
-          className={`text-center mb-6 md:mb-8 transition-all duration-700 ${
+          className={`text-center mb-5 sm:mb-6 md:mb-8 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          } text-balance mx-auto max-w-4xl`}
+          } text-balance mx-auto max-w-5xl`}
           style={{
             fontFamily: "Poppins, sans-serif",
             fontWeight: 700,
-            fontSize: "clamp(28px, 5vw, 44px)",
-            lineHeight: "1.4",
+            fontSize: "clamp(24px, 5vw, 56px)",
+            lineHeight: "1.3",
             letterSpacing: "0px",
             color: "#154035",
           }}
@@ -157,14 +157,14 @@ const CTASection = () => {
 
         {/* Description */}
         <p
-          className={`text-center max-w-4xl mx-auto mb-8 md:mb-12 px-4 transition-all duration-700 delay-200 ${
+          className={`text-center max-w-5xl mx-auto mb-6 sm:mb-8 md:mb-10 lg:mb-12 px-4 transition-all duration-700 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           } text-balance`}
           style={{
             fontFamily: "Poppins, sans-serif",
             fontWeight: 400,
-            fontSize: "clamp(16px, 2vw, 18px)",
-            lineHeight: "1.9",
+            fontSize: "clamp(14px, 2.5vw, 22px)",
+            lineHeight: "1.8",
             letterSpacing: "0px",
             color: "#000000",
           }}
@@ -185,10 +185,10 @@ const CTASection = () => {
         >
           <Link
             href="/signup"
-            className="group relative flex items-center justify-center overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-105 w-full max-w-xs sm:max-w-sm md:max-w-md"
+            className="group relative flex items-center justify-center overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-105 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
             style={{
-              height: "51px",
-              borderRadius: "30px",
+              height: "clamp(44px, 6vw, 60px)",
+              borderRadius: "clamp(20px, 3vw, 30px)",
               backgroundColor: "#154035",
             }}
           >
@@ -201,20 +201,20 @@ const CTASection = () => {
               style={{
                 width: "calc(100% - 12px)",
                 height: "calc(100% - 12px)",
-                borderRadius: "25.4px",
+                borderRadius: "clamp(16px, 2.5vw, 25.4px)",
                 border: "0.5px solid #FFFFFF",
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
               }}
             >
-              <div className="relative flex items-center gap-2">
+              <div className="relative flex items-center gap-2 sm:gap-2.5 md:gap-3 px-2 sm:px-3">
                 <span
                   style={{
                     fontFamily: "Poppins, sans-serif",
                     fontWeight: 400,
-                    fontSize: "18px",
-                    lineHeight: "30px",
+                    fontSize: "clamp(14px, 2vw, 20px)",
+                    lineHeight: "1.5",
                     letterSpacing: "0px",
                     color: "#FFFFFF",
                   }}
@@ -226,7 +226,7 @@ const CTASection = () => {
                   alt="Arrow"
                   width={20}
                   height={20}
-                  className="transition-transform duration-300 group-hover:translate-x-1"
+                  className="w-[clamp(14px,2vw,20px)] h-[clamp(14px,2vw,20px)] transition-transform duration-300 group-hover:translate-x-1"
                 />
               </div>
             </div>
