@@ -31,7 +31,7 @@ const AppSection = () => {
     <section 
       id="app-section"
       ref={sectionRef}
-      className="relative w-full bg-gradient-to-br bg-gray-100 py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-28 overflow-hidden"
+      className="relative w-full bg-gradient-to-br bg-gray-100 pt-0 sm:pt-2 md:pt-4 lg:pt-6 xl:pt-8 pb-10 sm:pb-12 md:pb-16 lg:pb-20 xl:pb-24 2xl:pb-28 overflow-hidden"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">

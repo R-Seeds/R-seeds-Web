@@ -268,7 +268,7 @@ const HeroSection = () => {
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-30 flex flex-col lg:flex-row items-center justify-between px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 py-6 sm:py-8 md:py-10 lg:py-12 xl:py-16 gap-8 lg:gap-12 xl:gap-16 w-full max-w-[1920px] mx-auto">
+      <div className="relative z-30 flex flex-col lg:flex-row items-center justify-between px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 3xl:px-24 pt-6 sm:pt-8 md:pt-10 lg:pt-12 xl:pt-16 pb-0 sm:pb-2 md:pb-4 lg:pb-6 xl:pb-8 gap-8 lg:gap-12 xl:gap-16 w-full max-w-[1920px] mx-auto">
         {/* Left Side - Image */}
         <div className="w-full lg:w-1/2 relative animate-fadeInLeft order-2 lg:order-1">
           <div className="relative w-full max-w-none mx-auto lg:mx-0">
@@ -284,7 +284,7 @@ const HeroSection = () => {
                 width={1000}
                 height={1150}
                 className="w-full h-auto object-contain scale-[clamp(1.0,1.1,1.25)] lg:scale-[clamp(1.1,1.2,1.3)]"
-                style={{ left: 0}}
+                style={{ left: 0 }}
                 priority
               />
             </div>
@@ -315,34 +315,6 @@ const HeroSection = () => {
                 </svg>
               </div>
             ))}
-          </div>
-
-          {/* Review Counter */}
-          <div className="absolute top-[clamp(400px,60vh,720px)] left-full -translate-y-1/2 ml-2 sm:ml-3 md:ml-4 lg:ml-6 bg-white rounded-full shadow-xl px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 py-2 sm:py-3 md:py-4 lg:py-5 flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 animate-fadeInUp animation-delay-1000 z-30 max-w-[90vw] sm:max-w-none">
-            <div className="flex -space-x-1 sm:-space-x-2">
-              {["diana.png", "women.png", "glass.jpg", "girl.jpg"].map(
-                (avatar, i) => (
-                  <div
-                    key={i}
-                    className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12 rounded-full border-2 border-white overflow-hidden bg-gradient-to-br from-teal-400 to-emerald-500"
-                  >
-                    <Image
-                      src={`/${avatar}`}
-                      alt={`Reviewer ${i + 1}`}
-                      width={48}
-                      height={48}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                )
-              )}
-            </div>
-            <div>
-              <div className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-[#154035] whitespace-nowrap">
-                {reviewCount.toLocaleString()}+
-              </div>
-              <div className="text-[10px] xs:text-xs sm:text-sm md:text-base text-gray-600">Reviews</div>
-            </div>
           </div>
         </div>
 
@@ -451,6 +423,38 @@ const HeroSection = () => {
                 </div>
               </div>
             </button>
+          </div>
+
+          {/* Review Counter - Positioned below buttons */}
+          <div className="flex items-center justify-center lg:justify-start mt-4 sm:mt-6 md:mt-8 lg:mt-10 animate-fadeInUp animation-delay-1000">
+            <div className="bg-white rounded-full shadow-xl px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 py-2 sm:py-3 md:py-4 lg:py-5 flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5">
+              <div className="flex -space-x-1 sm:-space-x-2">
+                {["diana.png", "women.png", "glass.jpg", "girl.jpg"].map(
+                  (avatar, i) => (
+                    <div
+                      key={i}
+                      className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12 rounded-full border-2 border-white overflow-hidden bg-gradient-to-br from-teal-400 to-emerald-500"
+                    >
+                      <Image
+                        src={`/${avatar}`}
+                        alt={`Reviewer ${i + 1}`}
+                        width={48}
+                        height={48}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )
+                )}
+              </div>
+              <div>
+                <div className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-[#154035] whitespace-nowrap">
+                  {reviewCount.toLocaleString()}+
+                </div>
+                <div className="text-[10px] xs:text-xs sm:text-sm md:text-base text-gray-600">
+                  Reviews
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
