@@ -72,33 +72,33 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
             transform: translateY(-20px) scale(1.05);
           }
         }
-        @keyframes fadeIn {
-          from {
+        @keyframes fadeInFloat {
+          0% {
             opacity: 0;
-            transform: translateX(-30px);
+            transform: translateX(-30px) translateY(0px) scale(1);
           }
-          to {
+          50% {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateX(0) translateY(-20px) scale(1.05);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0) translateY(0px) scale(1);
           }
         }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        .animate-fadeIn {
-          animation: fadeIn 1s ease-out;
+        .animate-image {
+          animation: fadeInFloat 1s ease-out forwards, float 6s ease-in-out 1s infinite;
         }
       `}</style>
       <div className="flex min-h-screen flex-col overflow-x-hidden bg-white md:flex-row">
         {/* Left Side  */}
         <div
-          className="relative hidden md:flex md:w-[60%] lg:w-[58%] xl:w-[55%] h-72 md:h-auto lg:h-screen overflow-hidden bg-white animate-fadeIn"
+          className="relative hidden md:flex md:w-[60%] lg:w-[58%] xl:w-[55%] h-72 md:h-auto lg:h-screen overflow-hidden bg-white animate-image"
           style={{
             backgroundImage: "url('/Login security.jpg')",
             backgroundSize: "contain",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            animation: "float 6s ease-in-out infinite",
           }}
         >
         </div>
