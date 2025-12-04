@@ -30,6 +30,7 @@ const projects = [
 export default function Page() {
   const [isMounted, setIsMounted] = useState(false);
   const [roleChecked, setRoleChecked] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -55,7 +56,7 @@ export default function Page() {
 
   return (
     <div className='bg-white'>
-      <Header />
+      <Header onNotificationClick={() => setShowNotifications(!showNotifications)} />
       <Sidebar />
       <AnimatePresence mode='wait'>
         <motion.main 
@@ -86,13 +87,18 @@ export default function Page() {
               ))}
             </motion.div>
           </section>
-          <motion.aside 
-            className="w-full"
-            variants={fadeInUp}
-            custom={0.4}
-          >
-            <Notifications />
-          </motion.aside>
+          {showNotifications && (
+            <motion.aside 
+              className="w-full"
+              variants={fadeInUp}
+              custom={0.4}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+            >
+              <Notifications />
+            </motion.aside>
+          )}
         </motion.main>
       </AnimatePresence>
     </div>

@@ -35,6 +35,7 @@ const projects = [
 export default function Page() {
   const [isMounted, setIsMounted] = useState(false);
   const [roleChecked, setRoleChecked] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
   const router = useRouter();
   const [isFundModalOpen, setIsFundModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
@@ -80,7 +81,7 @@ export default function Page() {
 
   return (
     <div className="relative bg-white transition-all duration-300">
-      <Header />
+      <Header onNotificationClick={() => setShowNotifications(!showNotifications)} />
       <Sidebar />
 
       {/* Main Content */}
@@ -111,9 +112,18 @@ export default function Page() {
             </motion.div>
           </section>
 
-          <motion.aside className="w-full" variants={fadeInUp} custom={0.4}>
-            <Notifications />
-          </motion.aside>
+          {showNotifications && (
+            <motion.aside 
+              className="w-full" 
+              variants={fadeInUp} 
+              custom={0.4}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+            >
+              <Notifications />
+            </motion.aside>
+          )}
         </motion.main>
       </AnimatePresence>
 

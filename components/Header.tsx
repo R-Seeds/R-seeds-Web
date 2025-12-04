@@ -3,8 +3,11 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Bell, Plus } from 'lucide-react';
 
+interface HeaderProps {
+  onNotificationClick?: () => void;
+}
 
-export default function Header() {
+export default function Header({ onNotificationClick }: HeaderProps) {
   const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
 
   return (
@@ -26,7 +29,10 @@ export default function Header() {
             {/* Right side  */}
             <div className="flex items-center gap-4 -mr-18">
              
-              <button className="relative p-2 text-slate-600 hover:bg-slate-100 rounded-full">
+              <button 
+                onClick={onNotificationClick}
+                className="relative p-2 text-slate-600 hover:bg-slate-100 rounded-full"
+              >
                 <Bell size={20} />
                 <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-brand"></span>
               </button>
