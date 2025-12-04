@@ -49,38 +49,46 @@ const Login = () => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden bg-white md:flex-row">
-      {/* Left Side */}
-      <div 
-        className="relative hidden md:flex md:w-[60%] lg:w-[58%] xl:w-[55%] h-72 md:h-auto lg:h-screen overflow-hidden bg-[#00b68f] items-center justify-center"
-        style={{
-          backgroundImage: "url('/login.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <div className="absolute inset-0 " />
-        <div
-          className={`relative z-10 flex h-full w-full items-center justify-between px-6 md:px-8 lg:px-10 transition-all duration-700 ease-out "
-          `}
+    <>
+      <style>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px) scale(1);
+          }
+          50% {
+            transform: translateY(-20px) scale(1.05);
+          }
+        }
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateX(-30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        .animate-fadeIn {
+          animation: fadeIn 1s ease-out;
+        }
+      `}</style>
+      <div className="flex min-h-screen flex-col overflow-x-hidden bg-white md:flex-row">
+        {/* Left Side */}
+        <div 
+          className="relative hidden md:flex md:w-[60%] lg:w-[58%] xl:w-[55%] h-72 md:h-auto lg:h-screen overflow-hidden bg-white animate-fadeIn"
+          style={{
+            backgroundImage: "url('/Login security.jpg')",
+            backgroundSize: "contain",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            animation: "float 6s ease-in-out infinite",
+          }}
         >
-          <div className="text-white">
-            
-          </div>
-          <div className="flex flex-col gap-3 px-6 py-4 rounded-[32px] translate-x-6 w-44 items-stretch">
-            <button className="rounded-full bg-white text-[#00b68f] font-semibold py-2 text-base shadow-md">
-              Sign In
-            </button>
-            <button
-              onClick={handleSignUpClick}
-              className="rounded-full border border-white/70 text-white font-semibold py-2 text-base hover:bg-white/10 transition-colors"
-            >
-              Sign Up
-            </button>
-          </div>
         </div>
-      </div>
 
       {/* Right Side */}
       <div
@@ -90,11 +98,11 @@ const Login = () => {
       >
         <div className="w-full max-w-md">
           <div
-            className={`bg-[#00C896] rounded-2xl p-10 shadow-2xl transition-all duration-700 ease-out ${
+            className={`border border-gray-300 rounded-lg p-8 transition-all duration-700 ease-out ${
               isMounted ? "scale-100" : "scale-95"
             }`}
           >
-            <h1 className="text-white text-2xl font-bold mb-8 text-center">Welcome Back!</h1>
+            <h1 className="text-[#00C896] text-2xl font-bold mb-8 text-center">Welcome Back!</h1>
 
             <form onSubmit={handleSignIn} className="space-y-5">
               {/* Email Input */}
@@ -105,7 +113,7 @@ const Login = () => {
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-white border-2 border-teal-300 text-gray-900 placeholder:text-gray-500 focus:border-teal-400 focus:ring-0 rounded-lg h-12 px-4 outline-none transition-all"
+                  className="w-full bg-white border border-gray-300 text-black placeholder:text-gray-500 focus:border-black focus:ring-1 focus:ring-black rounded-lg h-12 px-4 outline-none transition-all"
                   required
                 />
               </div>
@@ -118,13 +126,13 @@ const Login = () => {
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-white border-2 border-teal-300 text-gray-900 placeholder:text-gray-500 focus:border-teal-400 focus:ring-0 rounded-lg h-12 px-4 pr-12 outline-none transition-all"
+                  className="w-full bg-white border border-gray-300 text-black placeholder:text-gray-500 focus:border-black focus:ring-1 focus:ring-black rounded-lg h-12 px-4 pr-12 outline-none transition-all"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black transition-colors"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -133,14 +141,14 @@ const Login = () => {
               {/* Sign In Button */}
               <button
                 type="submit"
-                className="w-full bg-white text-teal-500 hover:bg-gray-50 font-bold rounded-lg h-12 transition-all duration-200 shadow-lg"
+                className="w-full bg-[#00C896] text-white hover:bg-[#00b68f] font-bold rounded-lg h-12 transition-all duration-200"
               >
                 Sign In
               </button>
 
               {/* Forgot Password */}
               <div className="text-center">
-                <button type="button" className="text-sm text-white hover:text-white/80 transition-colors">
+                <button type="button" className="text-sm text-black hover:text-gray-700 transition-colors">
                   Forgot password?
                 </button>
               </div>
@@ -149,7 +157,7 @@ const Login = () => {
               <button
                 type="button"
                 onClick={handleGoogleSignIn}
-                className="w-full bg-[#00C896] hover:bg-teal-700 text-white font-medium rounded-lg h-12 flex items-center justify-center transition-all duration-200 shadow-lg"
+                className="w-full bg-white border border-gray-300 text-black hover:bg-gray-50 font-medium rounded-lg h-12 flex items-center justify-center transition-all duration-200"
               >
                 <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
                   <path
@@ -171,11 +179,24 @@ const Login = () => {
                 </svg>
                 Sign in with Google
               </button>
+
+              {/* Sign Up Link */}
+              <div className="text-center text-sm text-gray-600 mt-4">
+                Don't have an account?{" "}
+                <button
+                  type="button"
+                  onClick={handleSignUpClick}
+                  className="text-[#00C896] hover:text-[#00b68f] font-medium underline"
+                >
+                  Sign Up
+                </button>
+              </div>
             </form>
           </div>
         </div>
       </div>
     </div>
+    </>
   )
 }
 

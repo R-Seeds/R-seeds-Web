@@ -62,36 +62,46 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden bg-white md:flex-row">
-      {/* Left Side  */}
-      <div
-        className="relative hidden md:flex md:w-[60%] lg:w-[58%] xl:w-[55%] h-72 md:h-auto lg:h-screen overflow-hidden bg-[#00b68f] items-center justify-center"
-        style={{
-          backgroundImage: "url('/login.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <div className="absolute inset-0" />
+    <>
+      <style>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px) scale(1);
+          }
+          50% {
+            transform: translateY(-20px) scale(1.05);
+          }
+        }
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateX(-30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        .animate-fadeIn {
+          animation: fadeIn 1s ease-out;
+        }
+      `}</style>
+      <div className="flex min-h-screen flex-col overflow-x-hidden bg-white md:flex-row">
+        {/* Left Side  */}
         <div
-          className={`relative z-10 flex h-full w-full items-center justify-end px-6 md:px-8 lg:px-10 transition-all duration-700 ease-out ${
-            isMounted ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-6"
-          }`}
+          className="relative hidden md:flex md:w-[60%] lg:w-[58%] xl:w-[55%] h-72 md:h-auto lg:h-screen overflow-hidden bg-white animate-fadeIn"
+          style={{
+            backgroundImage: "url('/Login security.jpg')",
+            backgroundSize: "contain",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            animation: "float 6s ease-in-out infinite",
+          }}
         >
-          <div className="flex flex-col gap-3 px-6 py-4 rounded-[32px] translate-x-6 w-44 items-stretch">
-            <button
-              onClick={handleBackToLogin}
-              className="rounded-full border border-white/70 text-white font-semibold py-2 text-base hover:bg-white/10 transition-colors"
-            >
-              Sign In
-            </button>
-            <button className="rounded-full bg-white text-[#00b68f] font-semibold py-2 text-base shadow-md">
-              Sign Up
-            </button>
-          </div>
         </div>
-      </div>
 
       {/* Right Side */}
       <div
@@ -101,22 +111,24 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
       >
         <div className="w-full max-w-md">
           <div
-            className={`bg-[#00C896] rounded-2xl p-10 shadow-2xl transition-all duration-700 ease-out ${
+            className={`border border-gray-300 rounded-lg p-8 transition-all duration-700 ease-out ${
               isMounted ? "scale-100" : "scale-95"
             }`}
           >
             <div className="text-center mb-8">
-              <h1 className="text-white text-2xl font-bold mb-2">Join R-seeds</h1>
-              <p className="text-white text-sm">Empower Innovation from RCA Graduates</p>
+              <h1 className="text-[#00C896] text-2xl font-bold mb-2">
+                Join <span style={{ fontFamily: 'Akronim, cursive' }}>R</span>-seeds
+              </h1>
+              <p className="text-gray-600 text-sm">Empower Innovation from RCA Graduates</p>
             </div>
 
             {/* User Type Selection */}
             <div className="flex justify-center mb-8">
-              <div className="flex bg-white/20 rounded-lg p-1">
+              <div className="flex bg-gray-100 rounded-lg p-1">
                 <button
                   onClick={() => setUserType("graduate")}
                   className={`px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 ${
-                    userType === "graduate" ? "bg-white text-black" : "text-white"
+                    userType === "graduate" ? "bg-[#00C896] text-white" : "text-black"
                   }`}
                 >
                   <GraduationCap className="w-4 h-4" />
@@ -125,7 +137,7 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
                 <button
                   onClick={() => setUserType("sponsor")}
                   className={`px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 ${
-                    userType === "sponsor" ? "bg-white text-black" : "text-white"
+                    userType === "sponsor" ? "bg-[#00C896] text-white" : "text-black"
                   }`}
                 >
                   <DollarSign className="w-4 h-4" />
@@ -134,7 +146,7 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
                 <button
                   onClick={() => setUserType("user")}
                   className={`px-4 py-2 text-sm rounded-md font-medium flex items-center gap-2 ${
-                    userType === "user" ? "bg-white text-black" : "text-white"
+                    userType === "user" ? "bg-[#00C896] text-white" : "text-black"
                   }`}
                 >
                   <Users className="w-4 h-4" />
@@ -152,7 +164,7 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
                   placeholder="Full Name"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full bg-white border border-teal-300 text-gray-900 placeholder:text-gray-500 focus:border-teal-400 focus:ring-0 rounded-lg h-12 px-4 outline-none transition-all"
+                  className="w-full bg-white border border-gray-300 text-black placeholder:text-gray-500 focus:border-black focus:ring-1 focus:ring-black rounded-lg h-12 px-4 outline-none transition-all"
                   required
                 />
               </div>
@@ -165,7 +177,7 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-white border border-teal-300 text-gray-900 placeholder:text-gray-500 focus:border-teal-400 focus:ring-0 rounded-lg h-12 px-4 outline-none transition-all"
+                  className="w-full bg-white border border-gray-300 text-black placeholder:text-gray-500 focus:border-black focus:ring-1 focus:ring-black rounded-lg h-12 px-4 outline-none transition-all"
                   required
                 />
               </div>
@@ -178,7 +190,7 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
                   placeholder="Graduation Year"
                   value={graduationYear}
                   onChange={(e) => setGraduationYear(e.target.value)}
-                  className="w-full bg-white border border-teal-300 text-gray-900 placeholder:text-gray-500 focus:border-teal-400 focus:ring-0 rounded-lg h-12 px-4 outline-none transition-all"
+                  className="w-full bg-white border border-gray-300 text-black placeholder:text-gray-500 focus:border-black focus:ring-1 focus:ring-black rounded-lg h-12 px-4 outline-none transition-all"
                   required
                 />
               </div>
@@ -191,13 +203,13 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-white border border-teal-300 text-gray-900 placeholder:text-gray-500 focus:border-teal-400 focus:ring-0 rounded-lg h-12 px-4 pr-12 outline-none transition-all"
+                  className="w-full bg-white border border-gray-300 text-black placeholder:text-gray-500 focus:border-black focus:ring-1 focus:ring-black rounded-lg h-12 px-4 pr-12 outline-none transition-all"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black transition-colors"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -206,7 +218,7 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
               {/* Sign up Button */}
               <button
                 type="submit"
-                className="w-full bg-white text-teal-500 hover:bg-gray-50 font-bold rounded-lg h-12 transition-all duration-200 shadow-lg"
+                className="w-full bg-[#00C896] text-white hover:bg-[#00b68f] font-bold rounded-lg h-12 transition-all duration-200"
               >
                 Sign up as {userType.charAt(0).toUpperCase() + userType.slice(1)}
               </button>
@@ -215,7 +227,7 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
               <button
                 type="button"
                 onClick={handleGoogleSignIn}
-                className="w-full bg-white text-gray-700 hover:bg-gray-50 font-medium rounded-lg h-12 flex items-center justify-center transition-all duration-200 shadow-lg"
+                className="w-full bg-white border border-gray-300 text-black hover:bg-gray-50 font-medium rounded-lg h-12 flex items-center justify-center transition-all duration-200"
               >
                 <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
                   <path
@@ -237,11 +249,24 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
                 </svg>
                 Sign in with Google
               </button>
+
+              {/* Sign In Link */}
+              <div className="text-center text-sm text-gray-600 mt-4">
+                Already have an account?{" "}
+                <button
+                  type="button"
+                  onClick={handleBackToLogin}
+                  className="text-[#00C896] hover:text-[#00b68f] font-medium underline"
+                >
+                  Sign In
+                </button>
+              </div>
             </form>
           </div>
         </div>
       </div>
     </div>
+    </>
   )
 }
 
