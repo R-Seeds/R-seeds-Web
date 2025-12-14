@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import type React from "react"
 import { Eye, EyeOff, GraduationCap, DollarSign, Users } from "lucide-react"
+import { registerUser } from "@/utils/api"
 
 interface SignupProps {
   onBackToLogin?: () => void
@@ -15,9 +16,13 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
   const [email, setEmail] = useState("")
   const [graduationYear, setGraduationYear] = useState("")
   const [password, setPassword] = useState("")
+  const [organization, setOrganization] = useState("")
+  const [country, setCountry] = useState("")
   const [showPassword, setShowPassword] = useState(false)
-  const [userType, setUserType] = useState("user")
+  const [userType, setUserType] = useState<"user" | "graduate" | "sponsor">("user")
   const [isMounted, setIsMounted] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const timer = requestAnimationFrame(() => setIsMounted(true))
@@ -45,16 +50,53 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
     } catch {}
   }, [router, pathname])
 
-  const handleSignUp = (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError(null)
+    setIsLoading(true)
+
     try {
-      const usersRaw = localStorage.getItem("users")
-      const users = usersRaw ? JSON.parse(usersRaw) : {}
-      users[email] = { password, userType, fullName, graduationYear }
-      localStorage.setItem("users", JSON.stringify(users))
-      localStorage.setItem("userType", userType)
-    } catch {}
-    handleBackToLogin()
+      // Prepare request based on user type
+      const registerRequest: any = {
+        name: fullName,
+        email: email,
+        password: password,
+        role: userType.toUpperCase() as "USER" | "GRADUATE" | "SPONSOR",
+      }
+
+      // Add role-specific fields
+      if (userType === "graduate") {
+        if (!graduationYear) {
+          setError("Graduation year is required for graduates")
+          setIsLoading(false)
+          return
+        }
+        registerRequest.finishYear = parseInt(graduationYear)
+      } else if (userType === "sponsor") {
+        if (!organization) {
+          setError("Organization is required for sponsors")
+          setIsLoading(false)
+          return
+        }
+        registerRequest.organization = organization
+      } else if (userType === "user") {
+        if (!country) {
+          setError("Country is required for users")
+          setIsLoading(false)
+          return
+        }
+        registerRequest.country = country
+      }
+
+      // Call backend API
+      await registerUser(registerRequest)
+
+      // Redirect to login page after successful registration
+      router.push("/login?registered=true")
+    } catch (err: any) {
+      setError(err.message || "Registration failed. Please try again.")
+      setIsLoading(false)
+    }
   }
 
   const handleGoogleSignIn = () => {
@@ -126,7 +168,12 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
             <div className="flex justify-center mb-8">
               <div className="flex bg-gray-100 rounded-lg p-1">
                 <button
-                  onClick={() => setUserType("graduate")}
+                  type="button"
+                  onClick={() => {
+                    setUserType("graduate")
+                    setOrganization("")
+                    setCountry("")
+                  }}
                   className={`px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 ${
                     userType === "graduate" ? "bg-[#00C896] text-white" : "text-black"
                   }`}
@@ -135,7 +182,12 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
                   Graduate
                 </button>
                 <button
-                  onClick={() => setUserType("sponsor")}
+                  type="button"
+                  onClick={() => {
+                    setUserType("sponsor")
+                    setGraduationYear("")
+                    setCountry("")
+                  }}
                   className={`px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 ${
                     userType === "sponsor" ? "bg-[#00C896] text-white" : "text-black"
                   }`}
@@ -144,7 +196,12 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
                   Sponsor
                 </button>
                 <button
-                  onClick={() => setUserType("user")}
+                  type="button"
+                  onClick={() => {
+                    setUserType("user")
+                    setGraduationYear("")
+                    setOrganization("")
+                  }}
                   className={`px-4 py-2 text-sm rounded-md font-medium flex items-center gap-2 ${
                     userType === "user" ? "bg-[#00C896] text-white" : "text-black"
                   }`}
@@ -156,6 +213,13 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
             </div>
 
             <form onSubmit={handleSignUp} className="space-y-4">
+              {/* Error Message */}
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                  {error}
+                </div>
+              )}
+
               {/* Full Name Input */}
               <div>
                 <input
@@ -166,6 +230,7 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
                   onChange={(e) => setFullName(e.target.value)}
                   className="w-full bg-white border border-gray-300 text-black placeholder:text-gray-500 focus:border-black focus:ring-1 focus:ring-black rounded-lg h-12 px-4 outline-none transition-all"
                   required
+                  disabled={isLoading}
                 />
               </div>
 
@@ -179,21 +244,59 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-white border border-gray-300 text-black placeholder:text-gray-500 focus:border-black focus:ring-1 focus:ring-black rounded-lg h-12 px-4 outline-none transition-all"
                   required
+                  disabled={isLoading}
                 />
               </div>
 
-              {/* Graduation Year Input */}
-              <div>
-                <input
-                  id="graduationYear"
-                  type="text"
-                  placeholder="Graduation Year"
-                  value={graduationYear}
-                  onChange={(e) => setGraduationYear(e.target.value)}
-                  className="w-full bg-white border border-gray-300 text-black placeholder:text-gray-500 focus:border-black focus:ring-1 focus:ring-black rounded-lg h-12 px-4 outline-none transition-all"
-                  required
-                />
-              </div>
+              {/* Graduation Year Input - Only for Graduate */}
+              {userType === "graduate" && (
+                <div>
+                  <input
+                    id="graduationYear"
+                    type="number"
+                    placeholder="Graduation Year"
+                    value={graduationYear}
+                    onChange={(e) => setGraduationYear(e.target.value)}
+                    className="w-full bg-white border border-gray-300 text-black placeholder:text-gray-500 focus:border-black focus:ring-1 focus:ring-black rounded-lg h-12 px-4 outline-none transition-all"
+                    required
+                    disabled={isLoading}
+                    min="1900"
+                    max="2100"
+                  />
+                </div>
+              )}
+
+              {/* Organization Input - Only for Sponsor */}
+              {userType === "sponsor" && (
+                <div>
+                  <input
+                    id="organization"
+                    type="text"
+                    placeholder="Organization Name"
+                    value={organization}
+                    onChange={(e) => setOrganization(e.target.value)}
+                    className="w-full bg-white border border-gray-300 text-black placeholder:text-gray-500 focus:border-black focus:ring-1 focus:ring-black rounded-lg h-12 px-4 outline-none transition-all"
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+              )}
+
+              {/* Country Input - Only for User */}
+              {userType === "user" && (
+                <div>
+                  <input
+                    id="country"
+                    type="text"
+                    placeholder="Country"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    className="w-full bg-white border border-gray-300 text-black placeholder:text-gray-500 focus:border-black focus:ring-1 focus:ring-black rounded-lg h-12 px-4 outline-none transition-all"
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+              )}
 
               {/* Password Input */}
               <div className="relative">
@@ -205,11 +308,14 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full bg-white border border-gray-300 text-black placeholder:text-gray-500 focus:border-black focus:ring-1 focus:ring-black rounded-lg h-12 px-4 pr-12 outline-none transition-all"
                   required
+                  disabled={isLoading}
+                  minLength={4}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black transition-colors"
+                  disabled={isLoading}
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -218,9 +324,10 @@ const Signup = ({ onBackToLogin }: SignupProps) => {
               {/* Sign up Button */}
               <button
                 type="submit"
-                className="w-full bg-[#00C896] text-white hover:bg-[#00b68f] font-bold rounded-lg h-12 transition-all duration-200"
+                disabled={isLoading}
+                className="w-full bg-[#00C896] text-white hover:bg-[#00b68f] font-bold rounded-lg h-12 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Sign up as {userType.charAt(0).toUpperCase() + userType.slice(1)}
+                {isLoading ? "Creating Account..." : `Sign up as ${userType.charAt(0).toUpperCase() + userType.slice(1)}`}
               </button>
 
               {/* Google Sign In */}

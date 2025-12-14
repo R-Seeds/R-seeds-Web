@@ -1,39 +1,62 @@
 "use client"
 import { useEffect, useState } from "react"
 import type React from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Eye, EyeOff } from "lucide-react"
+import { loginUser, storeAuthData } from "@/utils/api"
 
 const Login = () => {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [showSuccess, setShowSuccess] = useState(false)
 
   useEffect(() => {
     const timer = requestAnimationFrame(() => setIsMounted(true))
     return () => cancelAnimationFrame(timer)
   }, [])
 
-  const handleSignIn = (e: React.FormEvent) => {
+  useEffect(() => {
+    // Check if redirected from signup
+    if (searchParams.get("registered") === "true") {
+      setShowSuccess(true)
+      // Remove query parameter from URL
+      router.replace("/login")
+      // Hide success message after 5 seconds
+      const timer = setTimeout(() => setShowSuccess(false), 5000)
+      return () => clearTimeout(timer)
+    }
+  }, [searchParams, router])
+
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError(null)
+    setIsLoading(true)
+
     try {
-      const usersRaw = localStorage.getItem("users")
-      const users = usersRaw ? JSON.parse(usersRaw) : {}
-      const record = users[email]
-      if (!record || record.password !== password) {
-        alert("Invalid email or password")
-        return
+      // Call backend API
+      const authResponse = await loginUser({ email, password })
+
+      // Store auth data
+      storeAuthData(authResponse)
+
+      // Redirect based on user role
+      const role = authResponse.user.role.toLowerCase()
+      if (role === "graduate") {
+        router.push("/graduate")
+      } else if (role === "sponsor") {
+        router.push("/sponsor")
+      } else {
+        router.push("/user")
       }
-      localStorage.setItem("userType", record.userType)
-      localStorage.setItem("isLoggedIn", "true")
-      const type = (record.userType || "user").toLowerCase()
-      if (type === "graduate") window.location.href = "/graduate"
-      else if (type === "sponsor") window.location.href = "/sponsor"
-      else window.location.href = "/user"
-    } catch {
-      alert("Unable to sign in right now. Please try again.")
+    } catch (err: any) {
+      setError(err.message || "Invalid email or password")
+      setIsLoading(false)
     }
   }
 
@@ -105,6 +128,20 @@ const Login = () => {
             <h1 className="text-[#00C896] text-2xl font-bold mb-8 text-center">Welcome Back!</h1>
 
             <form onSubmit={handleSignIn} className="space-y-5">
+              {/* Success Message */}
+              {showSuccess && (
+                <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm">
+                  Account created successfully! Please log in to continue.
+                </div>
+              )}
+
+              {/* Error Message */}
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                  {error}
+                </div>
+              )}
+
               {/* Email Input */}
               <div>
                 <input
@@ -115,6 +152,7 @@ const Login = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-white border border-gray-300 text-black placeholder:text-gray-500 focus:border-black focus:ring-1 focus:ring-black rounded-lg h-12 px-4 outline-none transition-all"
                   required
+                  disabled={isLoading}
                 />
               </div>
 
@@ -128,11 +166,13 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full bg-white border border-gray-300 text-black placeholder:text-gray-500 focus:border-black focus:ring-1 focus:ring-black rounded-lg h-12 px-4 pr-12 outline-none transition-all"
                   required
+                  disabled={isLoading}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black transition-colors"
+                  disabled={isLoading}
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -141,9 +181,10 @@ const Login = () => {
               {/* Sign In Button */}
               <button
                 type="submit"
-                className="w-full bg-[#00C896] text-white hover:bg-[#00b68f] font-bold rounded-lg h-12 transition-all duration-200"
+                disabled={isLoading}
+                className="w-full bg-[#00C896] text-white hover:bg-[#00b68f] font-bold rounded-lg h-12 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Sign In
+                {isLoading ? "Signing In..." : "Sign In"}
               </button>
 
               {/* Forgot Password */}
