@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Inter } from 'next/font/google';
 import Image from 'next/image';
-
-
+import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -26,7 +25,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/rseeds.png" type="image/png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className={`min-h-screen bg-white text-gray-900 antialiased ${inter.className} relative`}>
+      <body 
+        className={`min-h-screen bg-white text-gray-900 antialiased ${inter.className} relative`}
+        suppressHydrationWarning={true}
+      >
+        <Toaster position="top-right" />
         <div className="min-h-screen flex flex-col relative">
           <main className="flex-1 w-full">
             <div className="w-full">
