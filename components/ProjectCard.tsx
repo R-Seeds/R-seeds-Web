@@ -1,4 +1,3 @@
-
 'use client';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
@@ -12,20 +11,18 @@ type Project = {
   summary: string;
   raised: number;
   goal: number;
+  owner?: {
+    id: string;
+    name: string;
+    email: string;
+  };
 };
 
 export default function ProjectCard({ project }: { project: Project }) {
-  const progress = Math.min(100, Math.round((project.raised / project.goal) * 100));
+  const goal = project.goal || 1000;
+  const raised = project.raised || 0;
+  const progress = Math.min(100, Math.round((raised / goal) * 100)) || 0;
   const [isHovered, setIsHovered] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
 
   const floatingVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -43,115 +40,135 @@ export default function ProjectCard({ project }: { project: Project }) {
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
+      scale: 1,
       y: 0,
       transition: { 
-        duration: 0.5, 
-        ease: [0.4, 0, 0.2, 1] 
+        duration: 0.4, 
+        ease: "easeOut" 
       }
     },
     hover: { 
-      y: -5, 
-      boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' 
+      y: -10, 
+      boxShadow: '0 30px 60px -12px rgba(0,0,0,0.15), 0 18px 36px -18px rgba(0,0,0,0.1)' 
     }
   } as const;
 
   return (
     <motion.div
-      initial="hidden"
-      animate={isVisible ? 'visible' : 'hidden'}
       variants={cardVariants}
+      initial="visible"
+      animate="visible"
       whileHover="hover"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="relative"
+      style={{ opacity: 1, visibility: 'visible' }}
+      className="relative z-20 w-full"
     >
-      <Card className="overflow-hidden rounded-2xl">
-      <div className="flex items-center justify-between px-4 pt-3">
-        <div className="flex items-center gap-3">
-          <Image src="/microguard.jpg" alt="MicroGuard" width={32} height={32} className="h-8 w-8 rounded-full object-cover" />
-          <div className="text-base font-semibold">MicroGuard</div>
+      <div className="overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-slate-200/50 border border-slate-100 w-full transition-all duration-500 hover:shadow-brand/20">
+      <div className="flex items-center justify-between px-6 pt-5 pb-2 text-slate-900">
+        <div className="flex items-center gap-4">
+          <div className="h-10 w-10 rounded-full bg-brand/10 flex items-center justify-center text-brand font-bold text-sm ring-2 ring-brand/5">
+            {project.owner?.name?.charAt(0) || 'P'}
+          </div>
+          <div>
+            <div className="text-base font-bold leading-none">{project.owner?.name || 'Project Owner'}</div>
+            <div className="text-[10px] text-slate-400 mt-1 uppercase tracking-wider font-bold">Innovation Leader</div>
+          </div>
         </div>
-        <Ellipsis className="text-slate-500" size={18} />
+        <button className="h-10 w-10 rounded-full flex items-center justify-center text-slate-400 hover:bg-slate-50 transition-colors">
+          <Ellipsis size={20} />
+        </button>
       </div>
-      <div className="relative mx-4 mt-3 h-[320px] overflow-hidden rounded-2xl">
-        <Image src={project.image} alt={project.title} fill className="object-cover" />
+      
+      <div className="relative mx-6 mt-2 h-[280px] overflow-hidden rounded-[2rem] group-hover:shadow-xl transition-shadow duration-500">
+        <Image 
+          src={project.image || '/microguard.jpg'} 
+          alt={project.title} 
+          fill 
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          sizes="(max-width: 768px) 100vw, 800px"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
 
-      {/* floating actions */}
       <AnimatePresence>
         <motion.div 
-          className="relative mx-4 -mt-6 flex justify-center"
+          className="relative mx-6 -mt-8 flex justify-center z-30"
           initial={{ opacity: 0, y: 20 }}
           animate={{ 
             opacity: 1, 
-            y: isHovered ? -10 : 0,
-            transition: { 
-              y: { 
-                type: 'spring',
-                stiffness: 100,
-                damping: 10
-              },
-              opacity: { duration: 0.3 }
-            }
+            y: isHovered ? -12 : 0,
+          }}
+          transition={{ 
+            type: 'spring',
+            stiffness: 260,
+            damping: 20
           }}
         >
-          <div className="glass flex gap-8 rounded-2xl px-6 py-3 shadow-card backdrop-blur-sm">
+          <div className="glass flex gap-6 rounded-3xl px-6 py-3 shadow-2xl backdrop-blur-md bg-white/90 border border-white/20">
             {[
-              { icon: <Heart size={22} />, count: '123k' },
-              { icon: <MessageCircle size={22} />, count: '200' },
-              { icon: <Bookmark size={22} />, count: 'Save' },
-              { icon: <Share2 size={22} />, count: 'Share' }
+              { icon: <Heart size={20} />, count: '0' },
+              { icon: <MessageCircle size={20} />, count: '0' },
+              { icon: <Bookmark size={20} />, count: 'Save' },
+              { icon: <Share2 size={20} />, count: 'Share' }
             ].map((item, index) => (
               <motion.div 
                 key={index}
                 className="flex flex-col items-center text-brand"
                 custom={index}
                 initial="hidden"
-                animate={isVisible ? 'visible' : 'hidden'}
+                animate="visible"
                 variants={floatingVariants}
-                whileHover="hover"
               >
-                <motion.div 
-                  className="grid h-12 w-12 place-items-center rounded-full bg-brand/15 transition-all duration-300 hover:bg-brand/30"
-                  whileTap={{ scale: 0.9 }}
-                >
+                <button className="grid h-10 w-10 place-items-center rounded-2xl bg-brand/10 transition-all duration-300 hover:bg-brand hover:text-white hover:shadow-lg hover:shadow-brand/20">
                   {item.icon}
-                </motion.div>
-                <motion.div 
-                  className="mt-1 text-xs text-slate-600"
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ 
-                    opacity: isHovered ? 1 : 0.7,
-                    y: isHovered ? 0 : 5,
-                    scale: isHovered ? 1.1 : 1
-                  }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {item.count}
-                </motion.div>
+                </button>
               </motion.div>
             ))}
           </div>
         </motion.div>
       </AnimatePresence>
 
-      <div className="px-4 pb-5 pt-4">
-        <p className="text-[15px] text-slate-700">{project.summary}</p>
-        <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-slate-200">
-          <div className="h-full rounded-full bg-brand" style={{ width: `${progress}%` }} />
+      <div className="px-7 pb-8 pt-6 text-slate-900">
+        <div className="flex items-start justify-between gap-4 mb-3">
+          <h3 className="text-2xl font-black tracking-tight leading-tight">{project.title}</h3>
+          <div className="px-3 py-1 bg-brand/10 text-brand text-[10px] font-black uppercase tracking-widest rounded-full">Active</div>
         </div>
-        <div className="mt-4 flex items-center justify-between gap-3">
-          <div className="text-sm text-slate-700">Raised ${project.raised.toLocaleString()} of ${project.goal.toLocaleString()}</div>
-          <div className="flex gap-3">
-            <Button variant="outline" className="rounded-full border-brand text-brand hover:bg-brand/5">View Project</Button>
-            <Button className="rounded-full">Follow</Button>
+        <p className="text-[15px] text-slate-500 line-clamp-2 mb-6 font-medium leading-relaxed">{project.summary}</p>
+        
+        <div className="space-y-3">
+          <div className="h-3 w-full overflow-hidden rounded-full bg-slate-100 p-0.5 border border-slate-50">
+            <motion.div 
+              initial={{ width: 0 }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="h-full rounded-full bg-gradient-to-r from-brand to-emerald-400 shadow-[0_0_12px_rgba(0,195,153,0.4)]" 
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col">
+              <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400">Raised</span>
+              <span className="text-lg font-black text-brand">${project.raised.toLocaleString()}</span>
+            </div>
+            <div className="text-right flex flex-col">
+              <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400 text-right">Goal</span>
+              <span className="text-lg font-black text-slate-800">${project.goal.toLocaleString()}</span>
+            </div>
           </div>
         </div>
+
+        <div className="mt-8 flex gap-3">
+          <Button variant="outline" className="flex-1 h-14 rounded-2xl border-2 border-slate-100 text-slate-600 font-bold hover:bg-slate-50 hover:border-slate-200 transition-all">
+            Details
+          </Button>
+          <Button className="flex-1 h-14 rounded-2xl bg-brand text-white font-bold shadow-xl shadow-brand/20 hover:scale-[1.02] active:scale-95 transition-all">
+            Support Project
+          </Button>
+        </div>
       </div>
-    </Card>
+      </div>
     </motion.div>
   );
 }

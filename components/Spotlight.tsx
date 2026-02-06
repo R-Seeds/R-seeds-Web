@@ -11,17 +11,17 @@ const projects = [
 
 export default function Spotlight() {
   return (
-    <div>
-      <h3 className="mb-4 text-2xl font-bold text-slate-900">Spotlight Projects</h3>
-      <div className="flex gap-8 overflow-x-auto pb-3">
+    <div className="mb-8">
+      <h3 className="mb-6 text-xl font-bold text-slate-900 font-primary">Spotlight Projects</h3>
+      <div className="flex gap-6 overflow-x-auto pb-4 no-scrollbar">
         {projects.map((p) => (
-          <Link key={p.name} href={p.href} className="select-none">
-            <div className="rounded-3xl bg-gradient-to-tr from-brand to-purple-400 p-[3px] shadow-card transition-transform hover:scale-[1.02]">
-              <div className="relative h-40 w-40 overflow-hidden rounded-[22px] bg-white">
+          <Link key={p.name} href={p.href} className="select-none flex flex-col items-center group">
+            <div className="rounded-2xl bg-gradient-to-tr from-brand to-emerald-400 p-[2px] transition-transform group-hover:scale-105 shadow-sm">
+              <div className="relative h-20 w-20 overflow-hidden rounded-[14px] bg-white">
                 <Image src={p.img} alt={p.name} fill className="object-cover" />
               </div>
             </div>
-            <div className="mt-3 text-center text-xl font-semibold text-slate-800">{p.name}</div>
+            <div className="mt-3 text-center text-sm font-bold text-slate-800 group-hover:text-brand transition-colors">{p.name}</div>
           </Link>
         ))}
       </div>
